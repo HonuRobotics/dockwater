@@ -45,7 +45,9 @@ Help()
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git --port 8888:8888 --net=host --devices /dev/dri"
+ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git "
+ROCKER_ARGS+="--devices /dev/dri --net=host --ssh"
+ROCKER_ARGS="${ROCKER_ARGS} --devices /dev/dri --net=host --ssh"
 
 while getopts ":cstxh" option; do
   case $option in
@@ -71,6 +73,8 @@ IMG_NAME=${@:$OPTIND:1}
 # And append `_runtime`
 CONTAINER_NAME="$(tr ':' '_' <<< "$IMG_NAME")_runtime"
 ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
+ROCKER_ARGS="${ROCKER_ARGS} --hostname $CONTAINER_NAME"
+#ROCKER_ARGS+=' --env PS1="#"'
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
-
+echo ${ROCKER_ARGS}
 rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME 
