@@ -13,20 +13,22 @@ ARG GAZ=gazebo9
 
 # Tools useful during development.
 RUN apt update \
- && apt install -y --no-install-recommends\
+ && apt install -y --no-install-recommends \
         build-essential \
+        cmake \
         cppcheck \
         curl \
-        cmake \
-        lsb-release \
         gdb \
         git \
         libeigen3-dev \
+        libgles2-mesa-dev \
+        lsb-release \
         pkg-config \
         protobuf-compiler \
         python3-dbg \
         python3-pip \
         python3-venv \
+        qtbase5-dev \
         ruby \
         software-properties-common \
         sudo \
@@ -52,7 +54,6 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
  && apt install -y --no-install-recommends \
     ${GAZ} \
     lib${GAZ}-dev \
-    libgles2-mesa-dev \
     ros-${DIST}-gazebo-ros \
     ros-${DIST}-gazebo-ros-control \
     ros-${DIST}-gazebo-ros-pkgs \
@@ -75,7 +76,6 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-tf2-tools \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
-    qtbase5-dev \
  && apt clean
 
 RUN pip3 install numpy
