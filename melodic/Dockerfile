@@ -17,7 +17,6 @@ RUN apt update \
         cmake \
         cppcheck \
         curl \
-        gdb \
         git \
         libeigen3-dev \
         libgles2-mesa-dev \
@@ -86,6 +85,7 @@ RUN pip3 install numpy
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    gdb \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
