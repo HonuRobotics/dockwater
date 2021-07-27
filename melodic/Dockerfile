@@ -1,6 +1,5 @@
 # Ubuntu 18.04 with nvidia-docker2 beta opengl support.
-ARG BASEIMG=ros:melodic-ros-base
-FROM $BASEIMG
+FROM ros:melodic-ros-base
 
 # Set Ubuntu release
 ARG RELEASE=bionic
@@ -11,7 +10,7 @@ ARG DIST=melodic
 # Set Gazebo verison
 ARG GAZ=gazebo9
 
-# Tools useful during development.
+# Required utilities 
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
@@ -32,7 +31,6 @@ RUN apt update \
         ruby \
         software-properties-common \
         sudo \
-        vim \
         wget \
  && apt clean
 
@@ -45,37 +43,53 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && dpkg-reconfigure --frontend noninteractive tzdata \
  && apt clean
 
-# Get ROS melodic and Gazebo 9.
+# Get ROS and Gazebo
 RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > /etc/apt/sources.list.d/ros1-latest.list' \
- && /bin/sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable ${RELEASE} main" > /etc/apt/sources.list.d/gazebo-stable.list' \
  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
+ && /bin/sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable ${RELEASE} main" > /etc/apt/sources.list.d/gazebo-stable.list' \
  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2486D2DD83DB69272AFE98867170598AF249743 \
  && apt update \
  && apt install -y --no-install-recommends \
     ${GAZ} \
     lib${GAZ}-dev \
+    ros-${DIST}-gazebo-plugins \
     ros-${DIST}-gazebo-ros \
     ros-${DIST}-gazebo-ros-control \
     ros-${DIST}-gazebo-ros-pkgs \
-    ros-${DIST}-gazebo-plugins \
+    ros-${DIST}-effort-controllers \
+    ros-${DIST}-geographic-info \
     ros-${DIST}-hector-gazebo-plugins \
     ros-${DIST}-joint-state-controller \
     ros-${DIST}-joint-state-publisher \
     ros-${DIST}-joy \
     ros-${DIST}-joy-teleop \
     ros-${DIST}-key-teleop \
+    ros-${DIST}-move-base \
     ros-${DIST}-robot-localization \
     ros-${DIST}-robot-state-publisher \
     ros-${DIST}-ros-base \
     ros-${DIST}-rqt \
     ros-${DIST}-rqt-common-plugins \
+    ros-${DIST}-rqt-robot-plugins \
     ros-${DIST}-rviz \
     ros-${DIST}-teleop-tools \
+    ros-${DIST}-teleop-twist-joy \
     ros-${DIST}-teleop-twist-keyboard \
     ros-${DIST}-tf2-geometry-msgs \
     ros-${DIST}-tf2-tools \
+    ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
  && apt clean
 
 RUN pip3 install numpy
+
+# Optional: Dev. tools, applications, etc.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+## Customize your image here.
+#
+#
+## ...
