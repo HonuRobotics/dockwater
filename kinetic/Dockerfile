@@ -51,6 +51,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
  && apt install -y --no-install-recommends \
     ${GAZ} \
     lib${GAZ}-dev \
+    python-vcstool \
     ros-${DIST}-gazebo-plugins \
     ros-${DIST}-gazebo-ros \
     ros-${DIST}-gazebo-ros-control \

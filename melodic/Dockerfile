@@ -42,15 +42,16 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && dpkg-reconfigure --frontend noninteractive tzdata \
  && apt clean
 
-# Get ROS and Gazebo
+# Get ROS and Gazebo (note keyserver queries are very unreliable in bionic for some reason)
 RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > /etc/apt/sources.list.d/ros1-latest.list' \
- && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
+ && wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add - \
  && /bin/sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable ${RELEASE} main" > /etc/apt/sources.list.d/gazebo-stable.list' \
- && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2486D2DD83DB69272AFE98867170598AF249743 \
+ && wget  https://packages.osrfoundation.org/gazebo.key  -O - | sudo apt-key add - \
  && apt update \
  && apt install -y --no-install-recommends \
     ${GAZ} \
     lib${GAZ}-dev \
+    python-vcstool \
     ros-${DIST}-gazebo-plugins \
     ros-${DIST}-gazebo-ros \
     ros-${DIST}-gazebo-ros-control \
