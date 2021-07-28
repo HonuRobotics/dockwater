@@ -66,7 +66,7 @@ POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
 case $2 in
-    -w|--without-nvidia)
+    -w|--with-nvidia)
     if [ "$1" == "noetic" ]
     then
       BUILD_BASE="--build-arg BASEIMG=nvidia/cudagl:11.3.0-devel \
