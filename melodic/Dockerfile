@@ -1,5 +1,6 @@
-# Ubuntu 18.04 with nvidia-docker2 beta opengl support.
-FROM ros:melodic-ros-base
+# Base Image
+ARG BASEIMG=ros:melodic-ros-base
+FROM $BASEIMG
 
 # Set Ubuntu release
 ARG RELEASE=bionic
@@ -10,7 +11,7 @@ ARG DIST=melodic
 # Set Gazebo verison
 ARG GAZ=gazebo9
 
-# Required utilities 
+# Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
