@@ -46,7 +46,7 @@ JOY=/dev/input/js0
 CUDA=""
 ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 
-while getopts ":cst" option; do
+while getopts ":csth" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda ";;
