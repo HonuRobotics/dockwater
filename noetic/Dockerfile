@@ -18,6 +18,7 @@ RUN apt update \
         cppcheck \
         curl \
         git \
+        gnupg \
         libeigen3-dev \
         libgles2-mesa-dev \
         lsb-release \
