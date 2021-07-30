@@ -1,5 +1,6 @@
-# Ubuntu 18.04 with nvidia-docker2 beta opengl support.
-FROM ros:kinetic-ros-base
+# Base Image
+ARG BASEIMG=ros:kinetic-ros-base
+FROM $BASEIMG
 
 # Set Ubuntu release
 ARG RELEASE=xenial
@@ -10,7 +11,7 @@ ARG DIST=kinetic
 # Set Gazebo verison
 ARG GAZ=gazebo7
 
-# Required utilities 
+# Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
@@ -18,7 +19,6 @@ RUN apt update \
         cppcheck \
         curl \
         git \
-        gnupg \
         libeigen3-dev \
         libgles2-mesa-dev \
         lsb-release \
@@ -83,7 +83,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-xacro \
  && apt clean
 
-RUN apt install -y --no-install-recommends python3-numpy 
+RUN apt install -y --no-install-recommends python3-numpy
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \

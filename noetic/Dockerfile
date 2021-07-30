@@ -1,5 +1,6 @@
-# Ubuntu 20.04 with nvidia-docker2 beta opengl support.
-FROM ros:noetic-ros-base
+# Base Image
+ARG BASEIMG=ros:noetic-ros-base
+FROM $BASEIMG
 
 # Set Ubuntu release
 ARG RELEASE=focal
@@ -18,7 +19,6 @@ RUN apt update \
         cppcheck \
         curl \
         git \
-        gnupg \
         libeigen3-dev \
         libgles2-mesa-dev \
         lsb-release \
