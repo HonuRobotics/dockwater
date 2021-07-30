@@ -64,6 +64,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-joint-state-publisher \
     ros-${DIST}-joy \
     ros-${DIST}-joy-teleop \
+    ros-${DIST}-kdl-parser-py \
     ros-${DIST}-key-teleop \
     ros-${DIST}-move-base \
     ros-${DIST}-robot-localization \
@@ -78,6 +79,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-teleop-twist-keyboard \
     ros-${DIST}-tf2-geometry-msgs \
     ros-${DIST}-tf2-tools \
+    ros-${DIST}-urdfdom-py \
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
