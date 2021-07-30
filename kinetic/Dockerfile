@@ -10,7 +10,16 @@ ARG DIST=kinetic
 # Set Gazebo verison
 ARG GAZ=gazebo7
 
-# Required utilities 
+# Fixing TimeZone problem reported in VRX 2019
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt update \
+ && apt install -y \
+    tzdata \
+ && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
+ && dpkg-reconfigure --frontend noninteractive tzdata \
+ && apt clean
+
+# Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
@@ -32,15 +41,6 @@ RUN apt update \
         software-properties-common \
         sudo \
         wget \
- && apt clean
-
-# Fixing TimeZone problem reported in VRX 2019
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt update \
- && apt install -y \
-    tzdata \
- && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
  && apt clean
 
 # Get ROS and Gazebo
@@ -83,7 +83,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-xacro \
  && apt clean
 
-RUN apt install -y --no-install-recommends python3-numpy 
+RUN apt install -y --no-install-recommends python3-numpy
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \

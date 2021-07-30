@@ -10,6 +10,15 @@ ARG DIST=noetic
 # Set Gazebo version
 ARG GAZ=gazebo11
 
+# Fixing TimeZone problem reported in VRX 2019
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt update \
+ && apt install -y \
+    tzdata \
+ && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
+ && dpkg-reconfigure --frontend noninteractive tzdata \
+ && apt clean
+
 # Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends\
@@ -32,15 +41,6 @@ RUN apt update \
         software-properties-common \
         sudo \
         wget \
- && apt clean
-
-# Fixing TimeZone problem reported in VRX 2019
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt update \
- && apt install -y \
-    tzdata \
- && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
  && apt clean
 
 # Get ROS and Gazebo
