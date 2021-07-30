@@ -90,6 +90,7 @@ RUN pip3 install numpy
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb \
+    psmisc \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
