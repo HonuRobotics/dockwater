@@ -1,5 +1,5 @@
 # Base Image
-ARG BASEIMG=ros:melodic-ros-base
+ARG BASEIMG=nvidia/cudagl:11.3.0-devel-ubuntu18.04
 FROM $BASEIMG
 
 # Set Ubuntu release

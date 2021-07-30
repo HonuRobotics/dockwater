@@ -1,5 +1,5 @@
 # Base Image
-ARG BASEIMG=ros:noetic-ros-base
+ARG BASEIMG=nvidia/cudagl:11.3.0-devel
 FROM $BASEIMG
 
 # Set Ubuntu release
