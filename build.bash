@@ -18,22 +18,33 @@
 #
 
 # Builds a Docker image.
-image_name=$(basename $1)
+
+# Default
+image_name="noetic"
+
+
 
 if [ $# -lt 1 ]
 then
-    echo "Usage: $0 <path to directory containing Dockerfile>"
-    exit 1
+    echo "Building default image <${image_name}>"
+    read -p "Are you sure this is the image you want to build [y/n]? " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    then
+	exit 1
+    fi
+else
+    image_name=$(basename $1)
 fi
 
-if [ ! -f "${1}"/Dockerfile ]
+if [ ! -f "${image_name}"/Dockerfile ]
 then
     echo "Err: Directory does not contain a Dockerfile to build."
     exit 1
 fi
 
 image_plus_tag=$image_name:$(export LC_ALL=C; date +%Y_%m_%d_%H%M)
-docker build --rm -t $image_plus_tag -f "${1}"/Dockerfile "${1}" && \
+docker build --rm -t $image_plus_tag -f "${image_name}"/Dockerfile "${image_name}" && \
 docker tag $image_plus_tag $image_name:latest && \
 echo "Built $image_plus_tag and tagged as $image_name:latest"
 echo "To run:"
