@@ -62,6 +62,12 @@ while getopts ":csth" option; do
 done
 
 IMG_NAME=${@:$OPTIND:1}
+if [ -z "$IMG_NAME" ]
+then
+    IMG_NAME="noetic"
+    echo "Running default image <${IMG_NAME}>"
+fi
+
 
 # Split off ':latest' from IMG_NAME
 IFS=':' read -ra NAMES <<< "$IMG_NAME"
