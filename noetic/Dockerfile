@@ -1,4 +1,3 @@
-# Ubuntu 20.04 with nvidia-docker2 beta opengl support.
 FROM ros:noetic-ros-base
 
 # Set Ubuntu release

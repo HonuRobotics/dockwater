@@ -1,4 +1,3 @@
-# Ubuntu 18.04 with nvidia-docker2 beta opengl support.
 FROM ros:kinetic-ros-base
 
 # Set Ubuntu release
