@@ -2,6 +2,8 @@
 #
 # Typical usage: ./join.bash <container_name>
 #
+# Note that running: docker container ls
+# will give a list of running containers.
 
 CONTAINER_ID=$1
 
