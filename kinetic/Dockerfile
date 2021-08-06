@@ -1,4 +1,3 @@
-# Ubuntu 18.04 with nvidia-docker2 beta opengl support.
 FROM ros:kinetic-ros-base
 
 # Set Ubuntu release
@@ -90,6 +89,7 @@ RUN apt install -y --no-install-recommends python3-numpy
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb \
+    psmisc \
     vim \
     && rm -rf /var/lib/apt/lists/*
 

@@ -1,4 +1,3 @@
-# Ubuntu 20.04 with nvidia-docker2 beta opengl support.
 FROM ros:noetic-ros-base
 
 # Set Ubuntu release
@@ -92,6 +91,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb \
+    psmisc \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
