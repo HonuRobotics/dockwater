@@ -51,10 +51,10 @@ while getopts ":csth" option; do
     c) # enable cuda library support 
       CUDA="--cuda ";;
     s) # Build cloudsim image
-      ROCKER_ARGS="--cuda --nvidia --novnc --turbovnc --user --user-override-name=developer";;
+      ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
       echo "Building CI image"
-      ROCKER_ARGS="--cuda --dev-helpers --nvidia --user --user-override-name=developer";;
+      ROCKER_ARGS="--dev-helpers --nvidia --user --user-override-name=developer";;
     h) # print this help message and exit
       Help
       exit;; 
