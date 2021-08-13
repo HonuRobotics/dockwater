@@ -49,12 +49,12 @@ ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 while getopts ":csth" option; do
   case $option in
     c) # enable cuda library support 
-      CUDA="--cuda ";;
+      CUDA="--cuda-dev ";;
     s) # Build cloudsim image
-      ROCKER_ARGS="--cuda --nvidia --novnc --turbovnc --user --user-override-name=developer";;
+      ROCKER_ARGS="--cuda-dev --nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
       echo "Building CI image"
-      ROCKER_ARGS="--cuda --dev-helpers --nvidia --user --user-override-name=developer";;
+      ROCKER_ARGS="--cuda-dev --dev-helpers --nvidia --user --user-override-name=developer";;
     h) # print this help message and exit
       Help
       exit;; 
