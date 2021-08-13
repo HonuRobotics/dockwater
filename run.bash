@@ -48,16 +48,16 @@ ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 
 while getopts ":csth" option; do
   case $option in
-    c) # enable cuda library support 
+    c) # enable cuda library support
       CUDA="--cuda-dev ";;
     s) # Build cloudsim image
-      ROCKER_ARGS="--cuda-dev --nvidia --novnc --turbovnc --user --user-override-name=developer";;
-    t) # Build test image for Continuous Integration 
+      ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
+    t) # Build test image for Continuous Integration
       echo "Building CI image"
-      ROCKER_ARGS="--cuda-dev --dev-helpers --nvidia --user --user-override-name=developer";;
+      ROCKER_ARGS="--dev-helpers --nvidia --user --user-override-name=developer";;
     h) # print this help message and exit
       Help
-      exit;; 
+      exit;;
   esac
 done
 
@@ -69,4 +69,4 @@ CONTAINER_NAME="${NAMES[0]}_runtime"
 ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
 
-rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME 
+rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME
