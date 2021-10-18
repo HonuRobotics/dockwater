@@ -70,3 +70,4 @@ ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
 
 rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME 
+docker run --rm -it --gpus all nvidia/cuda:11.0-cudnn8-devel-ubuntu18.04 bash
