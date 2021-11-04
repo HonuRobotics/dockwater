@@ -95,6 +95,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
+# For catkin build
+RUN pip3 install osrf-pycommon
+
 ## Customize your image here.
 #
 #
