@@ -94,6 +94,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ## Customize your image here.
-#
-#
-## ...
+# LEANIS
+RUN apt update && apt install -y --no-install-recommends \
+    python-catkin-tools \
+    ros-${DIST}-joint-trajectory-controller \
+    ros-${DIST}-graph-msgs \
+    ros-${DIST}-moveit-visual-tools \
+    ros-${DIST}-mavros \
+    ros-${DIST}-moveit \
+    ros-${DIST}-moveit-servo \
+    && apt clean
+    
+
