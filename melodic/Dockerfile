@@ -104,5 +104,11 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-${DIST}-moveit \
     ros-${DIST}-moveit-servo \
     && apt clean
+
+# Moveit tutorials
+RUN apt update && apt install -y --no-install-recommends \
+ ros-${DIST}-pcl-ros \
+ ros-${DIST}-franka-ros \
+ && apt clean
     
 
