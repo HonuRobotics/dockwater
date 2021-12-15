@@ -26,6 +26,7 @@ RUN apt update \
         python3-dbg \
         python3-pip \
         python3-venv \
+	python3-scipy \
         qtbase5-dev \
         ruby \
         software-properties-common \
