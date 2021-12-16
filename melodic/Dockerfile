@@ -103,8 +103,8 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-${DIST}-mavros \
     ros-${DIST}-moveit \
     ros-${DIST}-moveit-servo \
+    ros-${DIST}-vrpn \
     && apt clean
-
 
 # LEANIS Ardupilot
 RUN apt update && apt install -y --no-install-recommends \
@@ -114,7 +114,6 @@ RUN apt update && apt install -y --no-install-recommends \
     && apt clean
 
 RUN /bin/bash /opt/ros/melodic/lib/mavros/install_geographiclib_datasets.sh
-
 
 # Moveit tutorials
 RUN apt update && apt install -y --no-install-recommends \
