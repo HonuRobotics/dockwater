@@ -95,6 +95,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ## Customize your image here.
 # LEANIS
+# FAU-FAPS adaptive_motion_control
 RUN apt update && apt install -y --no-install-recommends \
     python-catkin-tools \
     ros-${DIST}-joint-trajectory-controller \
@@ -104,6 +105,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-${DIST}-moveit \
     ros-${DIST}-moveit-servo \
     ros-${DIST}-vrpn \
+    ros-${DIST}-simple-message \
     && apt clean
 
 # LEANIS Ardupilot
@@ -120,4 +122,11 @@ RUN apt update && apt install -y --no-install-recommends \
  ros-${DIST}-pcl-ros \
  ros-${DIST}-franka-ros \
  && apt clean
+
+
+
+
+# Utilities
+RUN apt update && apt install -y --no-install-recommends \
+  ros-${DIST}-plotjuggler-ros
 
