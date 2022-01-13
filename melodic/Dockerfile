@@ -99,6 +99,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt update && apt install -y --no-install-recommends \
     python-catkin-tools \
     ros-${DIST}-joint-trajectory-controller \
+    ros-${DIST}-position-controllers \
+    ros-${DIST}-velocity-controllers \	
     ros-${DIST}-graph-msgs \
     ros-${DIST}-moveit-visual-tools \
     ros-${DIST}-mavros \
@@ -122,9 +124,6 @@ RUN apt update && apt install -y --no-install-recommends \
  ros-${DIST}-pcl-ros \
  ros-${DIST}-franka-ros \
  && apt clean
-
-
-
 
 # Utilities
 RUN apt update && apt install -y --no-install-recommends \
