@@ -25,6 +25,7 @@ RUN apt update \
         protobuf-compiler \
         python3-dbg \
         python3-pip \
+	python3-scipy \
         python3-venv \
         qtbase5-dev \
         ruby \
