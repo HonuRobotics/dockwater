@@ -19,6 +19,7 @@ RUN apt update \
     	libboost-date-time-dev \
     	libboost-system-dev \
    	libboost-filesystem-dev \
+	libboost-thread-dev \
 	libgflags-dev \
         libgles2-mesa-dev \
 	libglib2.0-dev \
