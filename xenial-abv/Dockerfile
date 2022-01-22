@@ -1,3 +1,5 @@
+# Dockerfile for development environement for FVS and AVS.
+
 FROM ubuntu:xenial
 
 # Set Ubuntu release
@@ -60,27 +62,34 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # https://github.com/ripl/lcm-docker
 
 #ENV LCM_VERSION 'master'
-ENV LCM_RELEASE '1.4.0'
+#ENV LCM_RELEASE '1.4.0'
+ENV LCM_RELEASE '1.3.1'
 ENV LCM_INSTALL_DIR "/usr/local/lib"
 
-# LCM
+# Install LCM
 RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_RELEASE/lcm-$LCM_RELEASE.zip && \
  unzip -q lcm-$LCM_RELEASE.zip && \
- cd lcm-$LCM_RELEASE && mkdir build && cd build && cmake .. && \
+ cd lcm-$LCM_RELEASE && \
+# v1.4.0 introduces cmake
+# mkdir build && cd build && cmake .. && \
+# v1.3.1 doesn't use cmake
+ ./configure && make && \
  make install && ldconfig && \
  cd / && rm -rf lcm-$LCM_RELEASE.zip lcm-$LCM_RELEASE
  
 # configure pkgconfig to find LCM
 ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_INSTALL_DIR/pkgconfig
 
-# libbot2 - for bot-lcm-tunnel
+# Install libbot2 - for bot-lcm-tunnel
 # Informed by https://github.com/ripl/libbot2-docker
 RUN wget https://github.com/libbot2/libbot2/archive/refs/heads/master.zip && \
  unzip -q master.zip && \
  cd libbot2-master && \
  make BUILD_PREFIX=/usr/local && \
  cd / && rm -rf libbot2-master master.zip
- 
+
+# Install libconfig
+
 RUN wget https://github.com/hyperrealm/libconfig/archive/refs/tags/v1.7.1.zip &&\
  unzip -q v1.7.1.zip && \
  cd libconfig-1.7.1 && \
