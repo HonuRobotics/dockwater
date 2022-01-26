@@ -17,24 +17,70 @@
 #
 #
 
-# Builds a Docker image.
-image_name=$(basename $1)
+# Usage function
+display_usage() {
+    echo "Usage:
 
+./build.bash [--prefix PREFIX | -p PREFIX] DOCKERFILE_PATH
+
+Example:./build.bash --prefix my_side_project noetic 
+
+./build.bash --prefix my_side_project noetic 
+
+Image name is concatenation of PREFIX and DOCKERFILE_PATH
+"
+}
+
+# Process command line arguments
+POSITIONAL_ARGS=()
+PREFIX=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -p|--prefix)
+	PREFIX="$2"
+	shift # past argument
+	shift # past value
+	;;
+    -h|--help)
+	display_usage
+	exit
+	;;
+    -*|--*)
+	echo "Unknown option $1"
+	display_usage
+	exit 1
+	;;
+    *)
+	POSITIONAL_ARGS+=("$1") # save positional arg
+	shift # past argument
+	;;
+  esac
+done
+
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+# Make sure we have at the one positional argumant.
 if [ $# -lt 1 ]
 then
-    echo "Usage: $0 <path to directory containing Dockerfile>"
+    display_usage
     exit 1
 fi
 
-if [ ! -f "${1}"/Dockerfile ]
+# Create image name
+DOCKERFILE_PATH=$1
+SUFFIX=$(basename $DOCKERFILE_PATH)
+IMAGE_NAME="${PREFIX}${SUFFIX}"
+echo "Building <${IMAGE_NAME}> from Docker file at <${DOCKERFILE_PATH}>."
+
+if [ ! -f "${DOCKERFILE_PATH}"/Dockerfile ]
 then
-    echo "Err: Directory does not contain a Dockerfile to build."
+    echo "Err: Directory  <${DOCKERFILE_PATH}> does not contain a Dockerfile to build."
     exit 1
 fi
 
-image_plus_tag=$image_name:$(export LC_ALL=C; date +%Y_%m_%d_%H%M)
-docker build --rm -t $image_plus_tag -f "${1}"/Dockerfile "${1}" && \
-docker tag $image_plus_tag $image_name:latest && \
-echo "Built $image_plus_tag and tagged as $image_name:latest"
+IMAGE_PLUS_TAG=$IMAGE_NAME:$(export LC_ALL=C; date +%Y_%m_%d_%H%M)
+docker build --rm -t $IMAGE_PLUS_TAG -f "${DOCKERFILE_PATH}"/Dockerfile "${DOCKERFILE_PATH}" && \
+docker tag $IMAGE_PLUS_TAG $IMAGE_NAME:latest && \
+echo "Built $IMAGE_PLUS_TAG and tagged as $IMAGE_NAME:latest"
 echo "To run:"
-echo "./run.bash $image_name:latest"
+echo "./run.bash $IMAGE_NAME:latest"
