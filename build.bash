@@ -18,7 +18,8 @@
 #
 
 # Builds a Docker image.
-image_name=$(basename $1)
+image_name=dockwater
+distro=$(basename $1)
 
 if [ $# -lt 1 ]
 then
@@ -34,7 +35,7 @@ fi
 
 image_plus_tag=$image_name:$(export LC_ALL=C; date +%Y_%m_%d_%H%M)
 docker build --rm -t $image_plus_tag -f "${1}"/Dockerfile "${1}" && \
-docker tag $image_plus_tag $image_name:latest && \
-echo "Built $image_plus_tag and tagged as $image_name:latest"
+docker tag $image_plus_tag $image_name:$distro && \
+echo "Built $image_plus_tag and tagged as $image_name:$distro"
 echo "To run:"
-echo "./run.bash $image_name:latest"
+echo "./run.bash $image_name:$distro"
