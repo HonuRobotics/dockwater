@@ -63,9 +63,9 @@ done
 
 IMG_NAME=${@:$OPTIND:1}
 
-# Split off ':latest' from IMG_NAME
-IFS=':' read -ra NAMES <<< "$IMG_NAME"
-CONTAINER_NAME="${NAMES[0]}_runtime"
+# Replace `:` with `_` to comply with docker container naming
+# And append `_runtime`
+CONTAINER_NAME="$(tr ':' '_' <<< "$IMG_NAME")_runtime"
 ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
 
