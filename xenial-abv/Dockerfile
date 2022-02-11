@@ -17,6 +17,8 @@ RUN apt update \
 	freeglut3-dev \
 	g++ \
         git \
+	iputils-ping \
+	iputils-tracepath \
 	libboost-dev \
     	libboost-date-time-dev \
     	libboost-system-dev \
@@ -34,6 +36,7 @@ RUN apt update \
     	libyaml-cpp-dev \
 	libxmu-dev \
         lsb-release \
+	net-tools \
 	openjdk-8-jdk \
         pkg-config \
 	python-dev \

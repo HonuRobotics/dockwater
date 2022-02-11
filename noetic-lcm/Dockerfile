@@ -1,13 +1,15 @@
 # Must build the noetic base image first
 FROM dockwater:noetic
 
-# LCM prereq's
+# LCM prereq's and other useful tools
 RUN apt update \
  && apt install -y --no-install-recommends \
     	autoconf \
 	automake \
 	freeglut3-dev \
 	g++ \
+	iputils-ping \
+	iputils-tracepath \
 	libboost-dev \
     	libboost-date-time-dev \
     	libboost-system-dev \
@@ -39,5 +41,17 @@ RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_RELEASE/lcm-$LC
 # v1.3.1 doesn't use cmake
  ./configure && make && \
  make install && ldconfig && \
+ cd ./lcm-python && python3 setup.py install &&  \
  cd / && rm -rf lcm-$LCM_RELEASE.zip lcm-$LCM_RELEASE
- 
+
+
+# configure pkgconfig to find LCM
+ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_INSTALL_DIR/pkgconfig
+
+# Install libbot2 - for bot-lcm-tunnel
+# Informed by https://github.com/ripl/libbot2-docker
+#RUN wget https://github.com/libbot2/libbot2/archive/refs/heads/master.zip && \
+# unzip -q master.zip && \
+# cd libbot2-master && \
+# make BUILD_PREFIX=/usr/local && \
+# cd / && rm -rf libbot2-master master.zip
