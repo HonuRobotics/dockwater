@@ -71,9 +71,11 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-kdl-parser-py \
     ros-${DIST}-key-teleop \
     ros-${DIST}-move-base \
+    ros-${DIST}-moveit* \
     ros-${DIST}-robot-localization \
     ros-${DIST}-robot-state-publisher \
     ros-${DIST}-ros-base \
+    ros-${DIST}-ros-controllers \
     ros-${DIST}-rqt \
     ros-${DIST}-rqt-common-plugins \
     ros-${DIST}-rqt-robot-plugins \
