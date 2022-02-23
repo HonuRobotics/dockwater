@@ -73,6 +73,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-move-base \
     ros-${DIST}-moveit-planners \
     ros-${DIST}-moveit-simple-controller-manager \
+    ros-${DIST}-moveit-ros-visualization \
     ros-${DIST}-robot-localization \
     ros-${DIST}-robot-state-publisher \
     ros-${DIST}-ros-base \
