@@ -86,7 +86,12 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
+    ros-${DIST}-pcl-ros \
+    ros-${DIST}-image-view \
  && apt clean
+
+# Fix rqt_image_viewer pyqt5 problem
+RUN python3 -m pip remove pyqt5 pyqt5-sip
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \

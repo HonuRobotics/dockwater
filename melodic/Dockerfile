@@ -9,7 +9,7 @@ ARG DIST=melodic
 # Set Gazebo verison
 ARG GAZ=gazebo9
 
-# Required utilities 
+# Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
@@ -82,6 +82,8 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
+    ros-${DIST}-pcl-ros \
+    ros-${DIST}-image-view \
  && apt clean
 
 RUN pip3 install numpy
