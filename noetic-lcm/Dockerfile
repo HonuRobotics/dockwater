@@ -24,6 +24,7 @@ RUN apt update \
 	libncurses5-dev \
 	libtool \
 	openjdk-8-jdk \
+	texinfo \
 	unzip \
 	zip \
  && apt clean
@@ -50,8 +51,21 @@ ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_INSTALL_DIR/pkgconfig
 
 # Install libbot2 - for bot-lcm-tunnel
 # Informed by https://github.com/ripl/libbot2-docker
-#RUN wget https://github.com/libbot2/libbot2/archive/refs/heads/master.zip && \
-# unzip -q master.zip && \
-# cd libbot2-master && \
-# make BUILD_PREFIX=/usr/local && \
-# cd / && rm -rf libbot2-master master.zip
+# BSB had to fork the upsteam repo to make a small change
+RUN wget https://github.com/bsb808/libbot2/archive/refs/heads/focal-dev.zip && \
+ unzip -q focal-dev.zip && \
+ cd libbot2-focal-dev && \
+ make BUILD_PREFIX=/usr/local && \
+ cd / && rm -rf libbot2-focal-dev focal-dev.zip
+
+# Install libconfig
+
+RUN wget https://github.com/hyperrealm/libconfig/archive/refs/tags/v1.7.1.zip &&\
+ unzip -q v1.7.1.zip && \
+ cd libconfig-1.7.1 && \
+ autoreconf && \
+ ./configure && \
+ make && \
+ make install && \
+ cd / && rm -rf libconfig-1.7.1 v1.7.1.zip
+ 
