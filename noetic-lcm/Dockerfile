@@ -1,7 +1,7 @@
 # Must build the noetic base image first
 FROM dockwater:noetic
 
-# LCM prereq's and other useful tools
+# LCM, FVS and AVS prereq's and other useful tools
 RUN apt update \
  && apt install -y --no-install-recommends \
     	autoconf \
@@ -24,6 +24,7 @@ RUN apt update \
 	libncurses5-dev \
 	libtool \
 	openjdk-8-jdk \
+	python3-serial \
 	texinfo \
 	txt2man \
 	unzip \
