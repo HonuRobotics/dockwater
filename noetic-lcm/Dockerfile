@@ -25,6 +25,7 @@ RUN apt update \
 	libtool \
 	openjdk-8-jdk \
 	texinfo \
+	txt2man \
 	unzip \
 	zip \
  && apt clean
