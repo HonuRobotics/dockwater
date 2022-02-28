@@ -35,17 +35,17 @@ RUN apt update \
 ENV LCM_RELEASE '1.3.1'
 ENV LCM_INSTALL_DIR "/usr/local/lib"
 
-# Install LCM
-RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_RELEASE/lcm-$LCM_RELEASE.zip && \
- unzip -q lcm-$LCM_RELEASE.zip && \
- cd lcm-$LCM_RELEASE && \
-# v1.4.0 introduces cmake
-# mkdir build && cd build && cmake .. && \
-# v1.3.1 doesn't use cmake
- ./configure && make && \
+# Install LCM from source.
+# If we use latest release (v1.4.0 from Aug. 2018) we get
+# Deprecation warnings with Python3
+# - see https://github.com/lcm-proj/lcm/issues/347
+RUN wget https://github.com/lcm-proj/lcm/archive/refs/heads/master.zip && \
+ unzip -q master.zip && \
+ cd lcm-master && \
+ mkdir build && cd build && cmake .. && \
  make install && ldconfig && \
- cd ./lcm-python && python3 setup.py install &&  \
- cd / && rm -rf lcm-$LCM_RELEASE.zip lcm-$LCM_RELEASE
+ cd ./lcm-python && make &&  \
+ cd / && rm -rf lcm-master.zip lcm-master
 
 
 # configure pkgconfig to find LCM
