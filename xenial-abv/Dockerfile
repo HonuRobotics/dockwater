@@ -41,6 +41,7 @@ RUN apt update \
         pkg-config \
 	python-dev \
 	python-numpy \
+	python-serial \
 	python-scipy python-matplotlib ipython \
 	python-setuptools \
         software-properties-common \
@@ -69,6 +70,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ENV LCM_RELEASE '1.3.1'
 ENV LCM_INSTALL_DIR "/usr/local/lib"
 
+# This is necessary to avoid an error when doing setup.py in lcm headless
+# `TypeError: decode() argument 1 must be string, not None`
+ENV PYTHONIOENCODING 'utf-8'
+
 # Install LCM
 RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_RELEASE/lcm-$LCM_RELEASE.zip && \
  unzip -q lcm-$LCM_RELEASE.zip && \
@@ -78,6 +83,7 @@ RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_RELEASE/lcm-$LC
 # v1.3.1 doesn't use cmake
  ./configure && make && \
  make install && ldconfig && \
+ cd ./lcm-python && python setup.py install && \
  cd / && rm -rf lcm-$LCM_RELEASE.zip lcm-$LCM_RELEASE
  
 # configure pkgconfig to find LCM

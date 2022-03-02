@@ -44,7 +44,8 @@ RUN wget https://github.com/lcm-proj/lcm/archive/refs/heads/master.zip && \
  cd lcm-master && \
  mkdir build && cd build && cmake .. && \
  make install && ldconfig && \
- cd ./lcm-python && make &&  \
+ cd ./lcm-python && make &&  make install && \
+ cd ../../lcm-python && sudo python3 setup.py install && \
  cd / && rm -rf lcm-master.zip lcm-master
 
 
