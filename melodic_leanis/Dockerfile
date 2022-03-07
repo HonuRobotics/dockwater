@@ -1,19 +1,16 @@
-FROM dockwater:noetic
-
+FROM dockwater:melodic
 # Set Ubuntu release
-ARG RELEASE=focal
+ARG RELEASE=bionic
 
 # Set ROS distribution
-ARG DIST=noetic
+ARG DIST=melodic
 
-# Set Gazebo version
-ARG GAZ=gazebo11
+# Set Gazebo verison
+ARG GAZ=gazebo9
 
 # LEANIS
 # FAU-FAPS adaptive_motion_control
 RUN apt update && apt install -y --no-install-recommends \
-    python3-catkin-tools \
-    python3-osrf-pycommon \
     python-catkin-tools \
     ros-${DIST}-joint-trajectory-controller \
     ros-${DIST}-position-controllers \
