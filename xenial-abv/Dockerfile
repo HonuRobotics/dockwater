@@ -47,6 +47,7 @@ RUN apt update \
         software-properties-common \
         sudo \
 	texinfo \
+	txt2man \
 	unzip \
         wget \
 	zip \
