@@ -101,7 +101,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
-## Customize your image here.
-#
-#
-## ...
+## Customization for optical_swarm project
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-${DIST}-vision-opencv \
+    && apt clean
