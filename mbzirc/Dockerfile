@@ -93,3 +93,12 @@ RUN apt update \
      ros-${DIST}-rviz2 \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean -qq
+
+# Some additional ROS 2 packages
+
+RUN apt update \
+  && apt install -y --no-install-recommends \
+     ros-${DIST}-rqt-graph \
+     ros-${DIST}-ros-ign \
+  && sudo rm -rf /var/lib/apt/lists/* \
+  && sudo apt-get clean -qq
