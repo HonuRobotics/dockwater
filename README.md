@@ -1,8 +1,43 @@
+
+
+# Required utilities
+RUN apt update \
+ && apt install -y --no-install-recommends \
+        build-essential \
+	ca-certificates \	
+        cmake \
+        cppcheck \
+        curl \
+        git \
+        gnupg2 \
+        libeigen3-dev \
+        libgflags-dev \
+        libgles2-mesa-dev \
+        lsb-release \
+        pkg-config \
+        protobuf-compiler \
+        python3-dbg \
+        python3-colcon-common-extensions \
+        python3-pip \
+        python3-scipy \
+        python3-vcstool \
+        python3-venv \
+        qtbase5-dev \
+        ruby \
+        software-properties-common \
+        sudo \
+	tzdata \
+        wget \
+ && apt -qq clean
+
+
 # dockwater
 Docker images used across multiple repositories supporting simulation of water-related robotics
 
 ## Distributions
 This repository supports baseline images for running Gazebo on the following ROS distributions:
+
+* Galactic (Ubuntu 20.04 Focal Fossa / ROS 2 Galactic Geochelone / Ignition Fortress)
 * Noetic (Ubuntu 20.04 Focal Fossa / ROS Noetic Ninjemys / Gazebo 11)
 * Melodic (Ubuntu 18.04 Bionic Beaver / ROS Melodic Morenia / Gazebo 9)
 * Kinetic (Ubuntu 18.04 Xenial Xerus / ROS Kinetic Kame / Gazebo 7)
