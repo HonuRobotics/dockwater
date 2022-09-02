@@ -2,29 +2,18 @@
 # This is what MBZIRC uses as a base.
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu20.04
 
-RUN apt-get update \
- && apt-get install --no-install-recommends -y \
-    sudo \
-    wget \
-    gnupg2 \
-    lsb-release \
-    ca-certificates \
- && rm -rf /var/lib/apt/lists/* \
- && apt-get -qq clean
-
-  
 # Setup timezone
-RUN echo 'Etc/UTC' > /etc/timezone && \
-  ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime \
-  && apt-get -qq update && apt-get -q -y install tzdata \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt-get -qq clean
-
-# Tools useful during development
-RUN apt-get update -qq \
- && apt-get install --no-install-recommends -y -qq \
+ENV TZ=Etc/UTC
+RUN echo $TZ > /etc/timezone && \
+  ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
+  
+# Tools necessary and useful during development
+RUN apt-get update && \
+ DEBIAN_FRONTEND=noninteractive \
+ apt-get install --no-install-recommends -y \
         build-essential \
         atop \
+	ca-certificates \
         cmake \
         cppcheck \
 	curl \
@@ -44,6 +33,7 @@ RUN apt-get update -qq \
         libgoogle-glog-dev \
         libspnav-dev \
         libusb-dev \
+	lsb-release \
 	net-tools \
 	pkg-config \
         protobuf-compiler \
@@ -54,14 +44,18 @@ RUN apt-get update -qq \
         python3-pip \
         python3-venv \
         software-properties-common \
+	sudo \
         vim \
+	wget \
 	xvfb \
  && apt-get clean -qq
 
+
+
 # Setup locale
-RUN sudo apt update && sudo apt install locales \
-  && sudo locale-gen en_US en_US.UTF-8 \
-  && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+#RUN sudo apt update && sudo apt install locales \
+#  && sudo locale-gen en_US en_US.UTF-8 \
+#  && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 # Set up ros2 repo
 RUN /bin/sh -c 'curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg' \
@@ -69,6 +63,7 @@ RUN /bin/sh -c 'curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master
 
 ARG ROSDIST=galactic
 ARG IGNDIST=fortress
+ENV IGNITION_VERSION fortress
 
 # Install ignition fortress and ROS2 Desktop
 RUN apt-get update \
@@ -105,7 +100,5 @@ RUN apt update \
      ros-${ROSDIST}-rviz2 \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean -qq
-
-ENV IGNITION_VERSION fortress
 
 ## Customize your image here.
