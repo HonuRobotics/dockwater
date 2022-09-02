@@ -51,8 +51,6 @@ RUN apt-get update && \
 	xvfb \
  && apt-get clean -qq
 
-
-
 # Setup locale
 RUN sudo apt update && sudo apt install locales \
   && sudo locale-gen en_US en_US.UTF-8 \
@@ -75,7 +73,7 @@ RUN apt-get update \
   && apt-get clean -qq
 
 # Install rosdep
-RUN apt-get update \
+RUN apt update \
   && apt install -y python3-rosdep \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean -qq \
@@ -93,7 +91,6 @@ RUN apt update \
      ros-${ROSDIST}-image-transport \
      ros-${ROSDIST}-mavros-msgs \
      ros-${ROSDIST}-image-transport-plugins \
-     ros-${ROSDIST}-ros-ign \
      ros-${ROSDIST}-rqt-graph \
      ros-${ROSDIST}-rqt-image-view \
      ros-${ROSDIST}-rqt-plot \
@@ -102,4 +99,11 @@ RUN apt update \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean -qq
 
+# Beware - don't install this: ros-${ROSDIST}-ros-ign
+# For MBZIRC this causes errors such as
+# [ign gazebo-1] Error [Converter.cc:156] Unable to convert from SDF version 1.9 to 1.8
+# [ign gazebo-1] [Err] [SystemLoader.cc:66] Failed to load system plugin [ignition-gazebo-forcetorque-system] : couldn't find shared library.
+#[ign gazebo-1] [Err] [SystemLoader.cc:66] Failed to load system plugin [ignition-gazebo-rf-comms-system] : couldn't find shared library.
+
 ## Customize your image here.
+
