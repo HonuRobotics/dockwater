@@ -43,6 +43,7 @@ RUN apt-get update && \
         python3-setuptools \
         python3-pip \
         python3-venv \
+	ruby \
         software-properties-common \
 	sudo \
         vim \
@@ -53,9 +54,9 @@ RUN apt-get update && \
 
 
 # Setup locale
-#RUN sudo apt update && sudo apt install locales \
-#  && sudo locale-gen en_US en_US.UTF-8 \
-#  && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+RUN sudo apt update && sudo apt install locales \
+  && sudo locale-gen en_US en_US.UTF-8 \
+  && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 # Set up ros2 repo
 RUN /bin/sh -c 'curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg' \
