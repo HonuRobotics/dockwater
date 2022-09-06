@@ -1,36 +1,3 @@
-
-
-# Required utilities
-RUN apt update \
- && apt install -y --no-install-recommends \
-        build-essential \
-	ca-certificates \	
-        cmake \
-        cppcheck \
-        curl \
-        git \
-        gnupg2 \
-        libeigen3-dev \
-        libgflags-dev \
-        libgles2-mesa-dev \
-        lsb-release \
-        pkg-config \
-        protobuf-compiler \
-        python3-dbg \
-        python3-colcon-common-extensions \
-        python3-pip \
-        python3-scipy \
-        python3-vcstool \
-        python3-venv \
-        qtbase5-dev \
-        ruby \
-        software-properties-common \
-        sudo \
-	tzdata \
-        wget \
- && apt -qq clean
-
-
 # dockwater
 Docker images used across multiple repositories supporting simulation of water-related robotics
 
