@@ -1,6 +1,5 @@
-# Ubuntu 20.04 with nvidia-docker2 beta opengl support
-# This is what MBZIRC uses as a base.
-FROM nvidia/opengl:1.0-glvnd-devel-ubuntu20.04
+# Ubuntu 20.04 
+FROM ros:galactic-ros-base-focal
 
 # Setup timezone
 ENV TZ=Etc/UTC
@@ -56,10 +55,6 @@ RUN sudo apt update && sudo apt install locales \
   && sudo locale-gen en_US en_US.UTF-8 \
   && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
-# Set up ros2 repo
-RUN /bin/sh -c 'curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg' \
-  && /bin/sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null'
-
 ARG ROSDIST=galactic
 ARG IGNDIST=fortress
 ENV IGNITION_VERSION fortress
@@ -71,14 +66,6 @@ RUN apt-get update \
      ros-${ROSDIST}-desktop \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean -qq
-
-# Install rosdep
-RUN apt update \
-  && apt install -y python3-rosdep \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt-get clean -qq \
-  && rosdep init \
-  && rosdep update
 
 # Install some 'standard' ROS packages and utilities.
 RUN apt update \
@@ -98,12 +85,6 @@ RUN apt update \
      ros-${ROSDIST}-rviz2 \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean -qq
-
-# Beware - don't install this: ros-${ROSDIST}-ros-ign
-# For MBZIRC this causes errors such as
-# [ign gazebo-1] Error [Converter.cc:156] Unable to convert from SDF version 1.9 to 1.8
-# [ign gazebo-1] [Err] [SystemLoader.cc:66] Failed to load system plugin [ignition-gazebo-forcetorque-system] : couldn't find shared library.
-#[ign gazebo-1] [Err] [SystemLoader.cc:66] Failed to load system plugin [ignition-gazebo-rf-comms-system] : couldn't find shared library.
 
 ## Customize your image here.
 
