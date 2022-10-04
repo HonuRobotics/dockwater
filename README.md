@@ -3,6 +3,8 @@ Docker images used across multiple repositories supporting simulation of water-r
 
 ## Distributions
 This repository supports baseline images for running Gazebo on the following ROS distributions:
+
+* Galactic (Ubuntu 20.04 Focal Fossa / ROS 2 Galactic Geochelone / Ignition Fortress)
 * Noetic (Ubuntu 20.04 Focal Fossa / ROS Noetic Ninjemys / Gazebo 11)
 * Melodic (Ubuntu 18.04 Bionic Beaver / ROS Melodic Morenia / Gazebo 9)
 * Kinetic (Ubuntu 18.04 Xenial Xerus / ROS Kinetic Kame / Gazebo 7)
