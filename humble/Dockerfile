@@ -57,7 +57,7 @@ RUN sudo apt update && sudo apt install locales \
 
 ARG ROSDIST=humble
 ARG GZDIST=garden
-ENV IGNITION_VERSION garden
+ENV GZ_VERSION garden
 
 # Set up repo to install Ignition
 RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg' \
