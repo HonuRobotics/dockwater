@@ -1,4 +1,4 @@
-# Ubuntu 20.04 
+# Ubuntu 22.04 
 FROM ros:humble-ros-base-jammy
 
 # Setup timezone
