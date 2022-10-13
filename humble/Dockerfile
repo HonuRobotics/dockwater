@@ -7,9 +7,9 @@ RUN echo $TZ > /etc/timezone && \
   ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
   
 # Tools necessary and useful during development
-RUN apt-get update && \
+RUN apt update && \
  DEBIAN_FRONTEND=noninteractive \
- apt-get install --no-install-recommends -y \
+ apt install --no-install-recommends -y \
         build-essential \
         atop \
 	ca-certificates \
@@ -48,7 +48,7 @@ RUN apt-get update && \
         vim \
 	wget \
 	xvfb \
- && apt-get clean -qq
+ && apt clean -qq
 
 # Setup locale
 RUN sudo apt update && sudo apt install locales \
@@ -87,5 +87,7 @@ RUN apt update \
      ros-${ROSDIST}-rqt-plot \
      ros-${ROSDIST}-rqt-topic \
      ros-${ROSDIST}-rviz2 \
+     ros-${ROSDIST}-joy-teleop \
+     ros-${ROSDIST}-joy-linux \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean -qq
