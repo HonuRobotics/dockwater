@@ -39,7 +39,6 @@ RUN apt update && \
         python3-dbg \
         python3-empy \
         python3-numpy \
-        python3-sdformat13 \
         python3-setuptools \
         python3-pip \
         python3-venv \
@@ -77,6 +76,7 @@ RUN apt update \
   && apt install -y --no-install-recommends \
      python3-colcon-common-extensions \
      python3-vcstool \
+     python3-sdformat13 \
      ros-${ROSDIST}-radar-msgs \
      ros-${ROSDIST}-ament-cmake-pycodestyle \
      ros-${ROSDIST}-xacro \
