@@ -55,7 +55,7 @@ while getopts ":cstxh" option; do
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
       echo "Building CI image"
-      ROCKER_ARGS="--dev-helpers --nvidia --user --user-override-name=developer";;
+      ROCKER_ARGS="--dev-helpers --nvidia";;
     x) # Build VRX Competition base image
       echo "Building VRX Competition server base image"
       ROCKER_ARGS="--dev-helpers --devices $JOY --nvidia --x11 --user --user-override-name=developer";;
