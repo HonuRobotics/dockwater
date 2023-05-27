@@ -77,6 +77,7 @@ RUN apt update \
      python3-colcon-common-extensions \
      python3-vcstool \
      python3-sdformat13 \
+     ros-${ROSDIST}-actuator-msgs \
      ros-${ROSDIST}-radar-msgs \
      ros-${ROSDIST}-ament-cmake-pycodestyle \
      ros-${ROSDIST}-xacro \
