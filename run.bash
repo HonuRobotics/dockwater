@@ -32,9 +32,10 @@ Help()
    # Display Help
    echo "Runs a docker container with the image created by build.bash."
    echo
-   echo "Syntax: scriptTemplate [-c|s|t|h]"
+   echo "Syntax: scriptTemplate [-c|i|s|t|h]"
    echo "options:"
    echo "c     Add cuda library support."
+   echo "i     With internal graphics card (without nvidia)"
    echo "s     Create an image with novnc for use with cloudsim."
    echo "t     Create a test image for use with CI pipelines."
    echo "x     Create base image for the VRX competition server."
@@ -47,10 +48,12 @@ JOY=/dev/input/js0
 CUDA=""
 ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 
-while getopts ":cstxh" option; do
+while getopts ":cstxhi" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda ";;
+    i) # With internal graphics card (without nvidia)
+      ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --x11 --user --home --git";;
     s) # Build cloudsim image
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
@@ -62,6 +65,9 @@ while getopts ":cstxh" option; do
     h) # print this help message and exit
       Help
       exit;; 
+    \?) # handle unrecognized options
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1;;
   esac
 done
 
