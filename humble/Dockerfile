@@ -64,12 +64,12 @@ RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share
   && /bin/sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null'
   
 # Install Gazebo and ROS2 Desktop
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN apt update \
+  && apt install -y --no-install-recommends \
      gz-${GZDIST} \
      ros-${ROSDIST}-desktop \
   && rm -rf /var/lib/apt/lists/* \
-  && apt-get clean -qq
+  && apt clean -qq
 
 # Install some 'standard' ROS packages and utilities.
 RUN apt update \
@@ -92,4 +92,4 @@ RUN apt update \
      ros-${ROSDIST}-joy-teleop \
      ros-${ROSDIST}-joy-linux \
   && sudo rm -rf /var/lib/apt/lists/* \
-  && sudo apt-get clean -qq
+  && sudo apt clean -qq
