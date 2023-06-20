@@ -85,6 +85,7 @@ RUN apt update \
      ros-${ROSDIST}-joy-linux \
      ros-${ROSDIST}-mavros-msgs \
      ros-${ROSDIST}-radar-msgs \
+     ros-${ROSDIST}-ros-gzgarden \
      ros-${ROSDIST}-rqt-graph \
      ros-${ROSDIST}-rqt-image-view \
      ros-${ROSDIST}-rqt-plot \
