@@ -78,18 +78,18 @@ RUN apt update \
      python3-vcstool \
      python3-sdformat13 \
      ros-${ROSDIST}-actuator-msgs \
-     ros-${ROSDIST}-radar-msgs \
      ros-${ROSDIST}-ament-cmake-pycodestyle \
-     ros-${ROSDIST}-xacro \
      ros-${ROSDIST}-image-transport \
-     ros-${ROSDIST}-mavros-msgs \
      ros-${ROSDIST}-image-transport-plugins \
+     ros-${ROSDIST}-joy-teleop \
+     ros-${ROSDIST}-joy-linux \
+     ros-${ROSDIST}-mavros-msgs \
+     ros-${ROSDIST}-radar-msgs \
      ros-${ROSDIST}-rqt-graph \
      ros-${ROSDIST}-rqt-image-view \
      ros-${ROSDIST}-rqt-plot \
      ros-${ROSDIST}-rqt-topic \
      ros-${ROSDIST}-rviz2 \
-     ros-${ROSDIST}-joy-teleop \
-     ros-${ROSDIST}-joy-linux \
+     ros-${ROSDIST}-xacro \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt clean -qq
