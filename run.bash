@@ -32,7 +32,7 @@ Help()
    # Display Help
    echo "Runs a docker container with the image created by build.bash."
    echo
-   echo "Syntax: scriptTemplate [-c|s|t|h]"
+   echo "Syntax: scriptTemplate [-c|s|t|i|h]"
    echo "options:"
    echo "c     Add cuda library support."
    echo "s     Create an image with novnc for use with cloudsim."
