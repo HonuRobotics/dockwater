@@ -19,10 +19,10 @@
 # Runs a docker container with the image created by build.bash
 # Requires:
 #   docker
-#   nvidia-docker
 #   an X server
 #   rocker
 # Recommended:
+#   nvidia-docker
 #   A joystick mounted to /dev/input/js0 or /dev/input/js1
 ############################################################
 # Help                                                     #
@@ -38,6 +38,7 @@ Help()
    echo "s     Create an image with novnc for use with cloudsim."
    echo "t     Create a test image for use with CI pipelines."
    echo "x     Create base image for the VRX competition server."
+   echo "i     Create image with only intel gpu support."
    echo "h     Print this help message and exit."
    echo
 }
@@ -45,9 +46,10 @@ Help()
 
 JOY=/dev/input/js0
 CUDA=""
+INTEL=/dev/dri
 ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 
-while getopts ":cstxh" option; do
+while getopts ":cstxih" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda ";;
@@ -59,9 +61,12 @@ while getopts ":cstxh" option; do
     x) # Build VRX Competition base image
       echo "Building VRX Competition server base image"
       ROCKER_ARGS="--dev-helpers --devices $JOY --nvidia --x11 --user --user-override-name=developer";;
-    h) # print this help message and exit
+    i) # Build without nividia gpu but only intel gpu
+      echo "Building with only intel gpu"
+      ROCKER_ARGS="--dev-helpers --devices $INTEL $JOY --x11 --user --home --git";;
+    h) # print this help message
       Help
-      exit;; 
+      return 0;; 
   esac
 done
 
