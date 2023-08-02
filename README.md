@@ -21,7 +21,7 @@ DIST=(noetic | melodic | kinetic)
 ```
 Run the image locally using the `run.bash` script:
 ```
-./run.bash ${DIST}:latest
+./run.bash dockwater:${DIST}
 ```
 
 ## Build for CI
