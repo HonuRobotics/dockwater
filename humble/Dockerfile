@@ -1,5 +1,7 @@
+ARG BASE_IMG=ros:humble-ros-base-jammy
+
 # Ubuntu 22.04 
-FROM ros:humble-ros-base-jammy
+FROM $BASE_IMG
 
 # Setup timezone
 ENV TZ=Etc/UTC
@@ -37,7 +39,7 @@ RUN apt update && \
 	pkg-config \
         protobuf-compiler \
         python3-dbg \
-        python3-empy \
+ros:$distro-ros-base-jammy        python3-empy \
         python3-numpy \
         python3-setuptools \
         python3-pip \

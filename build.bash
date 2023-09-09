@@ -20,6 +20,7 @@
 # Builds a Docker image.
 image_name=dockwater
 distro=$(basename $1)
+image_base=${2:-ros:$distro-ros-base-jammy}
 
 if [ $# -lt 1 ]
 then
@@ -34,7 +35,7 @@ then
 fi
 
 image_plus_tag=$image_name:$(export LC_ALL=C; date +%Y_%m_%d_%H%M)
-docker build --rm -t $image_plus_tag -f "${1}"/Dockerfile "${1}" && \
+docker build --rm --build-arg BASE_IMG=$image_base -t $image_plus_tag -f "${1}"/Dockerfile "${1}" && \
 docker tag $image_plus_tag $image_name:$distro && \
 echo "Built $image_plus_tag and tagged as $image_name:$distro"
 echo "To run:"
