@@ -69,8 +69,8 @@ RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share
 RUN apt update \
   && apt install -y --no-install-recommends \
      gz-${GZDIST} \
-     ros-${ROSDIST}-desktop \
-  && rm -rf /var/lib/apt/lists/* \
+     ros-${ROSDIST}-ros-base \
+     && rm -rf /var/lib/apt/lists/* \
   && apt clean -qq
 
 # Install some 'standard' ROS packages and utilities.
