@@ -92,5 +92,6 @@ RUN apt update \
      ros-${ROSDIST}-rqt-topic \
      ros-${ROSDIST}-rviz2 \
      ros-${ROSDIST}-xacro \
+     ros-${ROSDIST}-foxglove-bridge \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt clean -qq
