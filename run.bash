@@ -37,6 +37,7 @@ Help()
    echo "c     Add cuda library support."
    echo "s     Create an image with novnc for use with cloudsim."
    echo "t     Create a test image for use with CI pipelines."
+   echo "x     Create base image for the VRX competition server."
    echo "h     Print this help message and exit."
    echo
 }
@@ -46,7 +47,7 @@ JOY=/dev/input/js0
 CUDA=""
 ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git"
 
-while getopts ":csth" option; do
+while getopts ":cstxh" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda ";;
@@ -54,7 +55,10 @@ while getopts ":csth" option; do
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
       echo "Building CI image"
-      ROCKER_ARGS="--dev-helpers --nvidia --user --user-override-name=developer";;
+      ROCKER_ARGS="--dev-helpers --nvidia";;
+    x) # Build VRX Competition base image
+      echo "Building VRX Competition server base image"
+      ROCKER_ARGS="--dev-helpers --devices $JOY --nvidia --x11 --user --user-override-name=developer";;
     h) # print this help message and exit
       Help
       exit;; 
