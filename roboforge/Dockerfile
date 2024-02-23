@@ -61,9 +61,8 @@ RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share
   && /bin/sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null'
 
 ARG ROSDIST=humble
-ARG GZDIST=garden
-ENV GZ_VERSION garden
-
+#ARG GZDIST=garden
+#ENV GZ_VERSION garden
 
 # Install Gazebo and ROS2 Desktop
 RUN apt update \
@@ -73,35 +72,10 @@ RUN apt update \
   && rm -rf /var/lib/apt/lists/* \
   && apt clean -qq
 
-# Install some 'standard' ROS packages and utilities.
-RUN apt update \
-  && apt install -y --no-install-recommends \
-     python3-colcon-common-extensions \
-     python3-vcstool \
-     python3-sdformat13 \
-     ros-${ROSDIST}-actuator-msgs \
-     ros-${ROSDIST}-ament-cmake-pycodestyle \
-     ros-${ROSDIST}-image-transport \
-     ros-${ROSDIST}-image-transport-plugins \
-     ros-${ROSDIST}-joy-teleop \
-     ros-${ROSDIST}-joy-linux \
-     ros-${ROSDIST}-mavros-msgs \
-     ros-${ROSDIST}-radar-msgs \
-     ros-${ROSDIST}-ros-gzgarden \
-     ros-${ROSDIST}-rqt-graph \
-     ros-${ROSDIST}-rqt-image-view \
-     ros-${ROSDIST}-rqt-plot \
-     ros-${ROSDIST}-rqt-topic \
-     ros-${ROSDIST}-rviz2 \
-     ros-${ROSDIST}-xacro \
-  && sudo rm -rf /var/lib/apt/lists/* \
-  && sudo apt clean -qq
-
-
-
 # Turtlebot4 Simulator
 RUN apt update \
   && apt install -y --no-install-recommends \
-  ros-dev-tools \
-  ignition-fortress \
-  ros-humble-turtlebot4-simulator
+    ros-dev-tools \
+    ros-${ROSDIST}-turtlebot4-simulator \
+  && sudo rm -rf /var/lib/apt/lists/* \
+  && sudo apt clean -qq
