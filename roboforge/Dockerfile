@@ -23,6 +23,7 @@ RUN apt update && \
 	gnupg2 \
         gnutls-bin \
 	iputils-ping \
+	ipython3 \
         libbluetooth-dev \
         libccd-dev \
         libcwiid-dev \
@@ -69,6 +70,7 @@ RUN apt update \
   && apt install -y --no-install-recommends \
      ignition-fortress \
      ros-${ROSDIST}-desktop \
+     python3-colcon-clean \
   && rm -rf /var/lib/apt/lists/* \
   && apt clean -qq
 
