@@ -17,12 +17,16 @@ ENV LC_ALL C.UTF-8
 RUN apt update \
  && apt install -y --no-install-recommends \
         curl \
+	ipython3 \
         git \
         lsb-release \
         python3-dbg \
+	python3-matplotlib \
+	python3-tk \
         python3-pip \
 	python3-scipy \
         python3-venv \
+	python3-yaml \
 	python3-setuptools \
         qtbase5-dev \
         software-properties-common \
