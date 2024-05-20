@@ -1,14 +1,26 @@
 # dockwater
-Docker images used across multiple repositories supporting simulation of water-related robotics
 
-## Distributions
-This repository supports baseline images for running Gazebo on the following ROS distributions:
+Tools to simplify creation and use of Docker containers for development and production.  
+
+This project includes the following:
+
+1. Project-specific development container Dockerfiles, many of wich use ROS and Gazebo.
+1. Bash scripts to build images and run/join containers for interactive development environment - a thin wrapper for [rocker](https://github.com/osrf/rocker) functions.
+1. Documentation on common use-cases for developing inside of docker containers.
+
+## Base Development Environments
+
+The `main` branch of the repository supports baseline images for with ROS and Gazebo:
 
 * Humble (Ubuntu 22.04 Jammy Jellyfish / ROS 2 Humble Hawksbill / Gazebo Garden)
 * Galactic (Ubuntu 20.04 Focal Fossa / ROS 2 Galactic Geochelone / Ignition Fortress)
 * Noetic (Ubuntu 20.04 Focal Fossa / ROS Noetic Ninjemys / Gazebo 11)
 * Melodic (Ubuntu 18.04 Bionic Beaver / ROS Melodic Morenia / Gazebo 9)
 * Kinetic (Ubuntu 18.04 Xenial Xerus / ROS Kinetic Kame / Gazebo 7)
+
+## Project-Specific Environments
+
+Extending the base development environments is done by adding a branch to the repository, typically with the `PROJECT-dev` naming convention.  For example, the `gfoe-dev` branch is for a project that uses [LCM](https://github.com/lcm-proj/lcm), addition to the base environment.
 
 ## Dockerhub
 The latest images corresponding to each of the three distributions above are stored in the [`npslearninglab/watery_robots` repository on Dockerhub](https://hub.docker.com/r/npslearninglab/watery_robots).
