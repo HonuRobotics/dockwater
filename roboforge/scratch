@@ -1,0 +1,182 @@
+
+    ros-${ROSDIST}-turtlebot4-desktop \
+    ros-${ROSDIST}-turtlebot4-python-tutorials \
+
+
+
+# Install Gazebo and ROS2 Desktop
+RUN apt update \
+  && apt install -y --no-install-recommends \
+     ignition-fortress \
+     ros-${ROSDIST}-desktop \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt clean -qq
+
+# Install some 'standard' ROS packages and utilities.
+RUN apt update \
+  && apt install -y --no-install-recommends \
+     python3-colcon-common-extensions \
+     python3-vcstool \
+     python3-sdformat13 \
+     ros-${ROSDIST}-actuator-msgs \
+     ros-${ROSDIST}-ament-cmake-pycodestyle \
+     ros-${ROSDIST}-image-transport \
+     ros-${ROSDIST}-image-transport-plugins \
+     ros-${ROSDIST}-joy-teleop \
+     ros-${ROSDIST}-joy-linux \
+     ros-${ROSDIST}-radar-msgs \
+     ros-${ROSDIST}-rqt-graph \
+     ros-${ROSDIST}-rqt-image-view \
+     ros-${ROSDIST}-rqt-plot \
+     ros-${ROSDIST}-rqt-topic \
+     ros-${ROSDIST}-rviz2 \
+     ros-${ROSDIST}-xacro \
+  && sudo rm -rf /var/lib/apt/lists/* \
+  && sudo apt clean -qq
+
+# Turtlebot4 Simulator
+RUN apt update \
+  && apt install -y --no-install-recommends \
+    ros-dev-tools \
+    ignition-fortress \
+    ros-${ROSDIST}-turtlebot4-simulator \
+    ros-${ROSDIST}-turtlebot4-ignition-gui-plugins \
+    ros-${ROSDIST}-turtlebot4-ignition-bringup \
+    ros-${ROSDIST}-turtlebot4-desktop \
+    ros-${ROSDIST}-turtlebot4-python-tutorials \
+  && sudo rm -rf /var/lib/apt/lists/* \
+  && sudo apt clean -qq
+
+
+
+
+
+
+
+
+
+
+sb@9e09422c22f9:~$ sudo apt install ros-humble-desktop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  blt ca-certificates-java default-jdk default-jdk-headless default-jre default-jre-headless default-libmysqlclient-dev fonts-dejavu-extra fonts-lyx freeglut3 gdal-data
+  gir1.2-ibus-1.0 gstreamer1.0-plugins-base hdf5-helpers java-common libaec-dev libaec0 libaom-dev libarmadillo-dev libarmadillo10 libarpack2 libarpack2-dev
+  libasound2-dev libatk-wrapper-java libatk-wrapper-java-jni libblas-dev libblosc-dev libblosc1 libbrotli-dev libcdparanoia0 libcfitsio-dev libcfitsio-doc libcfitsio9
+  libcharls-dev libcharls2 libclang1-14 libdav1d-dev libdbus-1-dev libdc1394-dev libde265-0 libde265-dev libdecor-0-dev libdeflate-dev libdouble-conversion-dev
+  libdrm-dev libegl1-mesa-dev libexif-dev libexif-doc libexif12 libflann-dev libflann1.9 libfontconfig-dev libfontconfig1-dev libfreetype-dev libfreetype6-dev
+  libfreexl-dev libfreexl1 libfyba-dev libfyba0 libgbm-dev libgdal-dev libgdal30 libgdcm-dev libgdcm3.0 libgeos-c1v5 libgeos-dev libgeos3.10.2 libgeotiff-dev
+  libgeotiff5 libgif-dev libgl1-mesa-dev libgl2ps-dev libgl2ps1.4 libglew-dev libglew2.2 libgphoto2-6 libgphoto2-dev libgphoto2-l10n libgphoto2-port12
+  libgstreamer-plugins-base1.0-0 libhdf4-0-alt libhdf4-alt-dev libhdf5-103-1 libhdf5-cpp-103-1 libhdf5-dev libhdf5-fortran-102 libhdf5-hl-100 libhdf5-hl-cpp-100
+  libhdf5-hl-fortran-100 libhdf5-mpi-dev libhdf5-openmpi-103-1 libhdf5-openmpi-cpp-103-1 libhdf5-openmpi-dev libhdf5-openmpi-fortran-102 libhdf5-openmpi-hl-100
+  libhdf5-openmpi-hl-cpp-100 libhdf5-openmpi-hl-fortran-100 libheif-dev libheif1 libhyphen0 libibus-1.0-5 libibus-1.0-dev libice-dev libilmbase-dev libimagequant0
+  libjbig-dev libjpeg-dev libjpeg-turbo8-dev libjpeg8-dev libjson-c-dev libkml-dev libkmlbase1 libkmlconvenience1 libkmldom1 libkmlengine1 libkmlregionator1 libkmlxsd1
+  liblapack-dev liblbfgsb0 liblept5 libllvm14 liblz4-dev libmysqlclient-dev libmysqlclient21 libnetcdf-c++4 libnetcdf-cxx-legacy-dev libnetcdf-dev libnetcdf19 libnspr4
+  libnss3 libodbc2 libodbccr2 libodbcinst2 libogdi-dev libogdi4.1 libogg-dev libopencv-calib3d-dev libopencv-calib3d4.5d libopencv-contrib-dev libopencv-contrib4.5d
+  libopencv-core-dev libopencv-core4.5d libopencv-dev libopencv-dnn-dev libopencv-dnn4.5d libopencv-features2d-dev libopencv-features2d4.5d libopencv-flann-dev
+  libopencv-flann4.5d libopencv-highgui-dev libopencv-highgui4.5d libopencv-imgcodecs-dev libopencv-imgcodecs4.5d libopencv-imgproc-dev libopencv-imgproc4.5d
+  libopencv-ml-dev libopencv-ml4.5d libopencv-objdetect-dev libopencv-objdetect4.5d libopencv-photo-dev libopencv-photo4.5d libopencv-shape-dev libopencv-shape4.5d
+  libopencv-stitching-dev libopencv-stitching4.5d libopencv-superres-dev libopencv-superres4.5d libopencv-video-dev libopencv-video4.5d libopencv-videoio-dev
+  libopencv-videoio4.5d libopencv-videostab-dev libopencv-videostab4.5d libopencv-viz-dev libopencv-viz4.5d libopencv4.5-java libopencv4.5d-jni libopenexr-dev
+  libopenjp2-7-dev libopenni-dev libopenni-sensor-pointclouds0 libopenni0 libopenni2-0 libopenni2-dev liborc-0.4-0 libpcap0.8 libpciaccess-dev libpcl-apps1.12
+  libpcl-common1.12 libpcl-dev libpcl-features1.12 libpcl-filters1.12 libpcl-io1.12 libpcl-kdtree1.12 libpcl-keypoints1.12 libpcl-ml1.12 libpcl-octree1.12
+  libpcl-outofcore1.12 libpcl-people1.12 libpcl-recognition1.12 libpcl-registration1.12 libpcl-sample-consensus1.12 libpcl-search1.12 libpcl-segmentation1.12
+  libpcl-stereo1.12 libpcl-surface1.12 libpcl-tracking1.12 libpcl-visualization1.12 libpng-dev libpng-tools libpoppler-dev libpoppler-private-dev libpoppler118
+  libpq-dev libpq5 libproj-dev libproj22 libpulse-dev libpulse-mainloop-glib0 libpyside2-dev libpyside2-py3-5.15 libqhull-dev libqhull-r8.0 libqhull8.0 libqhullcpp8.0
+  libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5sensors5 libqt5webchannel5 libqt5webkit5 libqt5webkit5-dev libraqm0 libraw1394-dev libraw1394-tools
+  librttopo-dev librttopo1 libsdl2-dev libshiboken2-dev libshiboken2-py3-5.15 libsm-dev libsndio-dev libsocket++1 libspatialite-dev libspatialite7 libsuperlu-dev
+  libsuperlu5 libsz2 libtbb-dev libtbb12 libtbb2 libtbbmalloc2 libtesseract4 libtheora-dev libtiff-dev libtiffxx5 libtk8.6 libudev-dev liburiparser-dev liburiparser1
+  libusb-1.0-0-dev libusb-1.0-doc libutfcpp-dev libvisual-0.4-0 libvtk9-dev libvtk9-java libvtk9-qt-dev libvtk9.1 libvtk9.1-qt libwayland-bin libwayland-dev libwebp-dev
+  libwebpdemux2 libwoff1 libx265-dev libxaw7-dev libxcursor-dev libxerces-c-dev libxerces-c3.2 libxfixes-dev libxft-dev libxi-dev libxinerama-dev libxkbcommon-dev
+  libxmu-dev libxmu-headers libxpm-dev libxrandr-dev libxrender-dev libxsimd-dev libxss-dev libxt-dev libxv-dev libxxf86dga1 libxxf86vm-dev mailcap mime-support
+  mysql-common opencv-data openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless openni-utils poppler-data proj-bin proj-data pyqt5-dev
+  python-matplotlib-data python3-appdirs python3-beniget python3-brotli python3-cairo python3-cycler python3-decorator python3-fonttools python3-fs python3-gast
+  python3-kiwisolver python3-lz4 python3-matplotlib python3-mpi4py python3-mpmath python3-olefile python3-opencv python3-pil python3-pil.imagetk python3-ply
+  python3-pydot python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.sip python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtsvg python3-pyside2.qtwidgets
+  python3-pythran python3-scipy python3-sip python3-sip-dev python3-sympy python3-tk python3-tz python3-ufolib2 python3-unicodedata2 python3-vtk9 qdoc-qt5
+  qhelpgenerator-qt5 qt5-assistant qtattributionsscanner-qt5 qttools5-dev qttools5-dev-tools qttools5-private-dev ros-humble-action-tutorials-cpp
+  ros-humble-action-tutorials-interfaces ros-humble-action-tutorials-py ros-humble-angles ros-humble-composition ros-humble-cv-bridge ros-humble-demo-nodes-cpp
+  ros-humble-demo-nodes-cpp-native ros-humble-demo-nodes-py ros-humble-depthimage-to-laserscan ros-humble-dummy-map-server ros-humble-dummy-robot-bringup
+  ros-humble-dummy-sensors ros-humble-example-interfaces ros-humble-examples-rclcpp-minimal-action-client ros-humble-examples-rclcpp-minimal-action-server
+  ros-humble-examples-rclcpp-minimal-client ros-humble-examples-rclcpp-minimal-composition ros-humble-examples-rclcpp-minimal-publisher
+  ros-humble-examples-rclcpp-minimal-service ros-humble-examples-rclcpp-minimal-subscriber ros-humble-examples-rclcpp-minimal-timer
+  ros-humble-examples-rclcpp-multithreaded-executor ros-humble-examples-rclpy-executors ros-humble-examples-rclpy-minimal-action-client
+  ros-humble-examples-rclpy-minimal-action-server ros-humble-examples-rclpy-minimal-client ros-humble-examples-rclpy-minimal-publisher
+  ros-humble-examples-rclpy-minimal-service ros-humble-examples-rclpy-minimal-subscriber ros-humble-ignition-cmake2-vendor ros-humble-ignition-math6-vendor
+  ros-humble-image-geometry ros-humble-image-tools ros-humble-image-transport ros-humble-interactive-markers ros-humble-intra-process-demo ros-humble-joy
+  ros-humble-laser-geometry ros-humble-libcurl-vendor ros-humble-lifecycle ros-humble-logging-demo ros-humble-map-msgs ros-humble-pcl-conversions ros-humble-pcl-msgs
+  ros-humble-pendulum-control ros-humble-pendulum-msgs ros-humble-python-qt-binding ros-humble-qt-dotgraph ros-humble-qt-gui ros-humble-qt-gui-cpp
+  ros-humble-qt-gui-py-common ros-humble-quality-of-service-demo-cpp ros-humble-quality-of-service-demo-py ros-humble-resource-retriever ros-humble-rqt-action
+  ros-humble-rqt-bag ros-humble-rqt-bag-plugins ros-humble-rqt-common-plugins ros-humble-rqt-console ros-humble-rqt-graph ros-humble-rqt-gui ros-humble-rqt-gui-cpp
+  ros-humble-rqt-gui-py ros-humble-rqt-image-view ros-humble-rqt-msg ros-humble-rqt-plot ros-humble-rqt-publisher ros-humble-rqt-py-common ros-humble-rqt-py-console
+  ros-humble-rqt-reconfigure ros-humble-rqt-service-caller ros-humble-rqt-shell ros-humble-rqt-srv ros-humble-rqt-topic ros-humble-rttest ros-humble-rviz-assimp-vendor
+  ros-humble-rviz-common ros-humble-rviz-default-plugins ros-humble-rviz-ogre-vendor ros-humble-rviz-rendering ros-humble-rviz2 ros-humble-sdl2-vendor
+  ros-humble-sensor-msgs-py ros-humble-tango-icons-vendor ros-humble-teleop-twist-joy ros-humble-teleop-twist-keyboard ros-humble-tlsf ros-humble-tlsf-cpp
+  ros-humble-topic-monitor ros-humble-turtlesim shiboken2 sip-dev tango-icon-theme tcl-dev tcl8.6-dev tk tk-dev tk8.6 tk8.6-blt2.5 tk8.6-dev unicode-data
+  unixodbc-common unixodbc-dev vtk9 x11-utils xbitmaps xterm
+Suggested packages:
+  blt-demo gvfs libitpp-dev libasound2-doc liblapack-doc freetype2-doc libgdal-doc libgeotiff-epsg geotiff-bin gdal-bin glew-utils gphoto2 libvisual-0.4-plugins
+  libhdf4-doc hdf4-tools libhdf5-doc libice-doc netcdf-bin netcdf-doc odbc-postgresql tdsodbc ogdi-bin opencv-doc openni-doc openni2-doc libpcl-doc postgresql-doc-14
+  libraw1394-doc libsm-doc libsuperlu-doc libtbb-doc vtk9-doc vtk9-examples java-virtual-machine libwayland-doc libx265-doc libxaw-doc libxerces-c-doc libxsimd-doc
+  libxt-doc openjdk-11-demo openjdk-11-source visualvm fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-microhei | fonts-wqy-zenhei fonts-indic poppler-utils
+  ghostscript fonts-japanese-mincho | fonts-ipafont-mincho fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+  python-cycler-doc dvipng ffmpeg fonts-staypuft gir1.2-gtk-3.0 inkscape ipython3 python-matplotlib-doc python3-cairocffi python3-gi-cairo python3-gobject
+  python3-tornado texlive-extra-utils texlive-latex-extra python-mpmath-doc python3-gmpy2 python-pil-doc python-ply-doc python-pyside2-doc python-scipy-doc
+  python-sip-doc texlive-fonts-extra python-sympy-doc tix python3-tk-dbg mayavi2 qt5-doc gnome-icon-theme kdelibs-data tcl-doc tcl8.6-doc tk-doc tk8.6-doc mesa-utils
+  xfonts-cyrillic
+The following NEW packages will be installed:
+  blt ca-certificates-java default-jdk default-jdk-headless default-jre default-jre-headless default-libmysqlclient-dev fonts-dejavu-extra fonts-lyx freeglut3 gdal-data
+  gir1.2-ibus-1.0 gstreamer1.0-plugins-base hdf5-helpers java-common libaec-dev libaec0 libaom-dev libarmadillo-dev libarmadillo10 libarpack2 libarpack2-dev
+  libasound2-dev libatk-wrapper-java libatk-wrapper-java-jni libblas-dev libblosc-dev libblosc1 libbrotli-dev libcdparanoia0 libcfitsio-dev libcfitsio-doc libcfitsio9
+  libcharls-dev libcharls2 libclang1-14 libdav1d-dev libdbus-1-dev libdc1394-dev libde265-0 libde265-dev libdecor-0-dev libdeflate-dev libdouble-conversion-dev
+  libdrm-dev libegl1-mesa-dev libexif-dev libexif-doc libexif12 libflann-dev libflann1.9 libfontconfig-dev libfontconfig1-dev libfreetype-dev libfreetype6-dev
+  libfreexl-dev libfreexl1 libfyba-dev libfyba0 libgbm-dev libgdal-dev libgdal30 libgdcm-dev libgdcm3.0 libgeos-c1v5 libgeos-dev libgeos3.10.2 libgeotiff-dev
+  libgeotiff5 libgif-dev libgl1-mesa-dev libgl2ps-dev libgl2ps1.4 libglew-dev libglew2.2 libgphoto2-6 libgphoto2-dev libgphoto2-l10n libgphoto2-port12
+  libgstreamer-plugins-base1.0-0 libhdf4-0-alt libhdf4-alt-dev libhdf5-103-1 libhdf5-cpp-103-1 libhdf5-dev libhdf5-fortran-102 libhdf5-hl-100 libhdf5-hl-cpp-100
+  libhdf5-hl-fortran-100 libhdf5-mpi-dev libhdf5-openmpi-103-1 libhdf5-openmpi-cpp-103-1 libhdf5-openmpi-dev libhdf5-openmpi-fortran-102 libhdf5-openmpi-hl-100
+  libhdf5-openmpi-hl-cpp-100 libhdf5-openmpi-hl-fortran-100 libheif-dev libheif1 libhyphen0 libibus-1.0-5 libibus-1.0-dev libice-dev libilmbase-dev libimagequant0
+  libjbig-dev libjpeg-dev libjpeg-turbo8-dev libjpeg8-dev libjson-c-dev libkml-dev libkmlbase1 libkmlconvenience1 libkmldom1 libkmlengine1 libkmlregionator1 libkmlxsd1
+  liblapack-dev liblbfgsb0 liblept5 libllvm14 liblz4-dev libmysqlclient-dev libmysqlclient21 libnetcdf-c++4 libnetcdf-cxx-legacy-dev libnetcdf-dev libnetcdf19 libnspr4
+  libnss3 libodbc2 libodbccr2 libodbcinst2 libogdi-dev libogdi4.1 libogg-dev libopencv-calib3d-dev libopencv-calib3d4.5d libopencv-contrib-dev libopencv-contrib4.5d
+  libopencv-core-dev libopencv-core4.5d libopencv-dev libopencv-dnn-dev libopencv-dnn4.5d libopencv-features2d-dev libopencv-features2d4.5d libopencv-flann-dev
+  libopencv-flann4.5d libopencv-highgui-dev libopencv-highgui4.5d libopencv-imgcodecs-dev libopencv-imgcodecs4.5d libopencv-imgproc-dev libopencv-imgproc4.5d
+  libopencv-ml-dev libopencv-ml4.5d libopencv-objdetect-dev libopencv-objdetect4.5d libopencv-photo-dev libopencv-photo4.5d libopencv-shape-dev libopencv-shape4.5d
+  libopencv-stitching-dev libopencv-stitching4.5d libopencv-superres-dev libopencv-superres4.5d libopencv-video-dev libopencv-video4.5d libopencv-videoio-dev
+  libopencv-videoio4.5d libopencv-videostab-dev libopencv-videostab4.5d libopencv-viz-dev libopencv-viz4.5d libopencv4.5-java libopencv4.5d-jni libopenexr-dev
+  libopenjp2-7-dev libopenni-dev libopenni-sensor-pointclouds0 libopenni0 libopenni2-0 libopenni2-dev liborc-0.4-0 libpcap0.8 libpciaccess-dev libpcl-apps1.12
+  libpcl-common1.12 libpcl-dev libpcl-features1.12 libpcl-filters1.12 libpcl-io1.12 libpcl-kdtree1.12 libpcl-keypoints1.12 libpcl-ml1.12 libpcl-octree1.12
+  libpcl-outofcore1.12 libpcl-people1.12 libpcl-recognition1.12 libpcl-registration1.12 libpcl-sample-consensus1.12 libpcl-search1.12 libpcl-segmentation1.12
+  libpcl-stereo1.12 libpcl-surface1.12 libpcl-tracking1.12 libpcl-visualization1.12 libpng-dev libpng-tools libpoppler-dev libpoppler-private-dev libpoppler118
+  libpq-dev libpq5 libproj-dev libproj22 libpulse-dev libpulse-mainloop-glib0 libpyside2-dev libpyside2-py3-5.15 libqhull-dev libqhull-r8.0 libqhull8.0 libqhullcpp8.0
+  libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5sensors5 libqt5webchannel5 libqt5webkit5 libqt5webkit5-dev libraqm0 libraw1394-dev libraw1394-tools
+  librttopo-dev librttopo1 libsdl2-dev libshiboken2-dev libshiboken2-py3-5.15 libsm-dev libsndio-dev libsocket++1 libspatialite-dev libspatialite7 libsuperlu-dev
+  libsuperlu5 libsz2 libtbb-dev libtbb12 libtbb2 libtbbmalloc2 libtesseract4 libtheora-dev libtiff-dev libtiffxx5 libtk8.6 libudev-dev liburiparser-dev liburiparser1
+  libusb-1.0-0-dev libusb-1.0-doc libutfcpp-dev libvisual-0.4-0 libvtk9-dev libvtk9-java libvtk9-qt-dev libvtk9.1 libvtk9.1-qt libwayland-bin libwayland-dev libwebp-dev
+  libwebpdemux2 libwoff1 libx265-dev libxaw7-dev libxcursor-dev libxerces-c-dev libxerces-c3.2 libxfixes-dev libxft-dev libxi-dev libxinerama-dev libxkbcommon-dev
+  libxmu-dev libxmu-headers libxpm-dev libxrandr-dev libxrender-dev libxsimd-dev libxss-dev libxt-dev libxv-dev libxxf86dga1 libxxf86vm-dev mailcap mime-support
+  mysql-common opencv-data openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless openni-utils poppler-data proj-bin proj-data pyqt5-dev
+  python-matplotlib-data python3-appdirs python3-beniget python3-brotli python3-cairo python3-cycler python3-decorator python3-fonttools python3-fs python3-gast
+  python3-kiwisolver python3-lz4 python3-matplotlib python3-mpi4py python3-mpmath python3-olefile python3-opencv python3-pil python3-pil.imagetk python3-ply
+  python3-pydot python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.sip python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtsvg python3-pyside2.qtwidgets
+  python3-pythran python3-scipy python3-sip python3-sip-dev python3-sympy python3-tk python3-tz python3-ufolib2 python3-unicodedata2 python3-vtk9 qdoc-qt5
+  qhelpgenerator-qt5 qt5-assistant qtattributionsscanner-qt5 qttools5-dev qttools5-dev-tools qttools5-private-dev ros-humble-action-tutorials-cpp
+  ros-humble-action-tutorials-interfaces ros-humble-action-tutorials-py ros-humble-angles ros-humble-composition ros-humble-cv-bridge ros-humble-demo-nodes-cpp
+  ros-humble-demo-nodes-cpp-native ros-humble-demo-nodes-py ros-humble-depthimage-to-laserscan ros-humble-desktop ros-humble-dummy-map-server
+  ros-humble-dummy-robot-bringup ros-humble-dummy-sensors ros-humble-example-interfaces ros-humble-examples-rclcpp-minimal-action-client
+  ros-humble-examples-rclcpp-minimal-action-server ros-humble-examples-rclcpp-minimal-client ros-humble-examples-rclcpp-minimal-composition
+  ros-humble-examples-rclcpp-minimal-publisher ros-humble-examples-rclcpp-minimal-service ros-humble-examples-rclcpp-minimal-subscriber
+  ros-humble-examples-rclcpp-minimal-timer ros-humble-examples-rclcpp-multithreaded-executor ros-humble-examples-rclpy-executors
+  ros-humble-examples-rclpy-minimal-action-client ros-humble-examples-rclpy-minimal-action-server ros-humble-examples-rclpy-minimal-client
+  ros-humble-examples-rclpy-minimal-publisher ros-humble-examples-rclpy-minimal-service ros-humble-examples-rclpy-minimal-subscriber ros-humble-ignition-cmake2-vendor
+  ros-humble-ignition-math6-vendor ros-humble-image-geometry ros-humble-image-tools ros-humble-image-transport ros-humble-interactive-markers
+  ros-humble-intra-process-demo ros-humble-joy ros-humble-laser-geometry ros-humble-libcurl-vendor ros-humble-lifecycle ros-humble-logging-demo ros-humble-map-msgs
+  ros-humble-pcl-conversions ros-humble-pcl-msgs ros-humble-pendulum-control ros-humble-pendulum-msgs ros-humble-python-qt-binding ros-humble-qt-dotgraph
+  ros-humble-qt-gui ros-humble-qt-gui-cpp ros-humble-qt-gui-py-common ros-humble-quality-of-service-demo-cpp ros-humble-quality-of-service-demo-py
+  ros-humble-resource-retriever ros-humble-rqt-action ros-humble-rqt-bag ros-humble-rqt-bag-plugins ros-humble-rqt-common-plugins ros-humble-rqt-console
+  ros-humble-rqt-graph ros-humble-rqt-gui ros-humble-rqt-gui-cpp ros-humble-rqt-gui-py ros-humble-rqt-image-view ros-humble-rqt-msg ros-humble-rqt-plot
+  ros-humble-rqt-publisher ros-humble-rqt-py-common ros-humble-rqt-py-console ros-humble-rqt-reconfigure ros-humble-rqt-service-caller ros-humble-rqt-shell
+  ros-humble-rqt-srv ros-humble-rqt-topic ros-humble-rttest ros-humble-rviz-assimp-vendor ros-humble-rviz-common ros-humble-rviz-default-plugins
+  ros-humble-rviz-ogre-vendor ros-humble-rviz-rendering ros-humble-rviz2 ros-humble-sdl2-vendor ros-humble-sensor-msgs-py ros-humble-tango-icons-vendor
+  ros-humble-teleop-twist-joy ros-humble-teleop-twist-keyboard ros-humble-tlsf ros-humble-tlsf-cpp ros-humble-topic-monitor ros-humble-turtlesim shiboken2 sip-dev
+  tango-icon-theme tcl-dev tcl8.6-dev tk tk-dev tk8.6 tk8.6-blt2.5 tk8.6-dev unicode-data unixodbc-common unixodbc-dev vtk9 x11-utils xbitmaps xterm
