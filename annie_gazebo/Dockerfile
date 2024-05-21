@@ -14,6 +14,7 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     ros-noetic-smach-ros \
     ros-noetic-audio-common \
     ros-noetic-roslint \
+    ros-noetic-twist-mux \
     && rm -rf /var/lib/apt/lists/*
     
 # Optional stuff
