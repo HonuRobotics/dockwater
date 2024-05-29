@@ -19,4 +19,5 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     
 # Optional stuff
 RUN apt update && apt install -y --no-install-recommends \
-    ipython3
+    ipython3 \
+    nano
