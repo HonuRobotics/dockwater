@@ -19,4 +19,14 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     
 # Optional stuff
 RUN apt update && apt install -y --no-install-recommends \
-    ipython3
+    ipython3 \
+    nano
+
+# source the ROS stuff so you don't have to repeat that every login
+# source /opt/ros/noetic/setup.bash
+# taken from https://answers.ros.org/question/370439/how-to-source-setupbash-in-a-ros2-dockerfile/
+RUN . /opt/ros/noetic/setup.sh
+
+# source ~/project12_ws/devel/setup.bash
+# can't figure out a way to reference the home directory ... 
+#RUN . ~/project12_ws/devel/setup.sh 
