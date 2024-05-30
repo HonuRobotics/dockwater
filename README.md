@@ -2,6 +2,9 @@
 
 Tools to simplify creation and use of Docker containers for development and production.  
 
+See [wiki](https://github.com/HonuRobotics/dockwater/wiki) for detailed use instructions.
+
+
 This project includes the following:
 
 1. Project-specific development container Dockerfiles, many of wich use ROS and Gazebo.
