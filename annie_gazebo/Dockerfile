@@ -17,11 +17,17 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     ros-noetic-twist-mux \
     && rm -rf /var/lib/apt/lists/*
     
-# Optional stuff
+# Stuff used for Project 12.  The latex packages take up a lot of space.
 RUN apt update && apt install -y --no-install-recommends \
     ipython3 \
-    nano \
-    plantuml
+    jstest-gtk \
+    latexmk \
+    nano \ 
+    plantuml \
+    ros-noetic-rosdoc-lite \
+    ros-noetic-smach-viewer \  # Still testing to see if this actually works
+    texlive-latex-extra
+    
     
 # source the ROS stuff so you don't have to repeat that every login
 RUN . /opt/ros/noetic/setup.sh
