@@ -25,8 +25,9 @@ RUN apt update && apt install -y --no-install-recommends \
     nano \ 
     plantuml \
     ros-noetic-rosdoc-lite \
-    ros-noetic-smach-viewer \  # Still testing to see if this actually works
-    texlive-latex-extra
+    ros-noetic-smach-viewer \  
+    texlive-latex-extra \
+    texlive-fonts-recommended
     
     
 # source the ROS stuff so you don't have to repeat that every login
