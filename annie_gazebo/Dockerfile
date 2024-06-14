@@ -9,6 +9,7 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     qtpositioning5-dev \
     libqt5svg5-dev \
     python3-future \
+    ros-noetic-nmea-msgs \
     ros-noetic-pid \
     ros-noetic-smach \
     ros-noetic-smach-ros \
