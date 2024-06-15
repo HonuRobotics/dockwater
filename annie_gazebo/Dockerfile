@@ -1,7 +1,7 @@
 # Must build the noetic base image first
 FROM dockwater:noetic
 
-# Deduced Project11 dependencies
+# Deduced Project11 and Project 12 dependencies
 RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no-install-recommends \
     gdal-bin \
     libpq-dev \
@@ -9,8 +9,12 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     qtpositioning5-dev \
     libqt5svg5-dev \
     python3-future \
+    ros-noetic-behaviortree-cpp \
+    ros-noetic-grid-map \
     ros-noetic-nmea-msgs \
+    ros-noetic-pcl-ros \
     ros-noetic-pid \
+    ros-noetic-rviz-map-plugin \	
     ros-noetic-smach \
     ros-noetic-smach-ros \
     ros-noetic-audio-common \
@@ -30,7 +34,9 @@ RUN apt update && apt install -y --no-install-recommends \
     texlive-latex-extra \
     texlive-fonts-recommended
     
-    
+# Update the package list and upgrade all packages
+RUN apt-get update && apt-get dist-upgrade -y
+
 # source the ROS stuff so you don't have to repeat that every login
 RUN . /opt/ros/noetic/setup.sh
 
