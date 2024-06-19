@@ -57,6 +57,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-vcstool \
+    catkin-lint \
     ros-${DIST}-gazebo-plugins \
     ros-${DIST}-gazebo-ros \
     ros-${DIST}-gazebo-ros-control \
@@ -92,7 +93,12 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
+    ros-${DIST}-pcl-ros \
+    ros-${DIST}-image-view \
  && apt clean
+
+# Fix rqt_image_viewer pyqt5 problem
+RUN python3 -m pip uninstall pyqt5 pyqt5-sip
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \

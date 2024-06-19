@@ -9,7 +9,7 @@ ARG DIST=kinetic
 # Set Gazebo verison
 ARG GAZ=gazebo7
 
-# Required utilities 
+# Required utilities
 RUN apt update \
  && apt install -y --no-install-recommends \
         build-essential \
@@ -82,15 +82,18 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
+    ros-${DIST}-pcl-ros \
+    ros-${DIST}-image-view \
  && apt clean
 
-RUN apt install -y --no-install-recommends python3-numpy 
+RUN apt install -y --no-install-recommends python3-numpy
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gdb \
     psmisc \
     vim \
+    x11-apps \
     && rm -rf /var/lib/apt/lists/*
 
 ## Customize your image here.
