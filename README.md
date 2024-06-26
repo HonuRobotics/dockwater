@@ -15,6 +15,7 @@ This project includes the following:
 
 The `main` branch of the repository supports baseline images for with ROS and Gazebo:
 
+* Jazzy (Ubuntu 24.04 Noble Numbat / ROS 2 Jazzy Jalisco / Gazebo Harmonic)
 * Humble (Ubuntu 22.04 Jammy Jellyfish / ROS 2 Humble Hawksbill / Gazebo Garden)
 * Galactic (Ubuntu 20.04 Focal Fossa / ROS 2 Galactic Geochelone / Ignition Fortress)
 * Noetic (Ubuntu 20.04 Focal Fossa / ROS Noetic Ninjemys / Gazebo 11)
@@ -29,9 +30,9 @@ Extending the base development environments is done by adding a branch to the re
 The latest images corresponding to each of the three distributions above are stored in the [`npslearninglab/watery_robots` repository on Dockerhub](https://hub.docker.com/r/npslearninglab/watery_robots).
 
 ## Build Instructions
-Build the base image with the `build.bash` script. 
+Build the base image with the `build.bash` script.
 ```
-DIST=(noetic | melodic | kinetic)
+DIST=(jazzy | humble | galactic | noetic | melodic | kinetic)
 ./build.bash ${DIST}
 ```
 Run the image locally using the `run.bash` script:
