@@ -54,10 +54,10 @@ while getopts ":cstxhir" option; do
     c) # enable cuda library support 
       CUDA="--cuda ";;
     i) # With internal graphics card (without nvidia)
-      ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --x11 --user --home --git";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --user --home --git";;
     r) # With internal graphics card (without nvidia) and with RDP default user is docker
       # shellcheck disable=SC2116
-      ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --x11 --git --home --port 3389:3389 --volume $(echo ~):/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --home --port 3389:3389 --volume $(echo ~):/home/docker/HOST";;
     s) # Build cloudsim image
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
