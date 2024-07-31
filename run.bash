@@ -45,7 +45,7 @@ Help()
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git --port 8888:8888"
+ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git --port 8888:8888 --devices /dev/dri"
 
 while getopts ":cstxh" option; do
   case $option in
