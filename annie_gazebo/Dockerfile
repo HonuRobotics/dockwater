@@ -28,6 +28,7 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && apt update && apt install -y --no
     
 # Stuff used for Project 12.  The latex packages take up a lot of space.
 RUN apt update && apt install -y --no-install-recommends \
+    iputils-ping \
     ipython3 \
     jstest-gtk \
     latexmk \
