@@ -43,5 +43,13 @@ RUN apt update && apt install -y --no-install-recommends \
 # Update the package list and upgrade all packages.  Otherwise you get an rviz error in Andy's demo: https://bitbucket.org/gfoe/project12/wiki/Visualize%20Radar%20in%202022-12-05-19-31-15_hover_while_fishing_boat_goes_by
 RUN apt-get update && apt-get dist-upgrade -y
 
+# Download and install SAE J1939 python module
+RUN mkdir -p /tmp/j1939 \
+    && curl -L https://bitbucket.org/gfoe/j1939/raw/04419f3a4130a381dd0a2e67aaa46c3556927880/j1939.tar.bz2 --output /tmp/j1939/j1939.tar.bz2 \
+    && cd /tmp/j1939 \
+    && tar jxf j1939.tar.bz2 \
+    && cd j1939 \
+    && sudo python3 setup.py install
+
 # source the ROS stuff so you don't have to repeat that every login
 RUN . /opt/ros/noetic/setup.sh
