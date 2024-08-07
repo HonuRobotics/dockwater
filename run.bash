@@ -48,6 +48,8 @@ CUDA=""
 ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git "
 ROCKER_ARGS+="--devices /dev/dri --net=host --ssh"
 ROCKER_ARGS="${ROCKER_ARGS} --devices /dev/dri --net=host --ssh"
+# Allow the container to access the X server so that GUI applications can be run remotely
+ROCKER_ARGS+=' --volume="${HOME}/.Xauthority:/root/.Xauthority:rw"'
 
 while getopts ":cstxh" option; do
   case $option in

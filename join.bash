@@ -6,5 +6,6 @@
 CONTAINER_ID=$1
 
 xhost +
-docker exec --privileged -e DISPLAY=${DISPLAY} -e LINES=`tput lines` -it ${CONTAINER_ID} bash
+#docker exec --privileged -e DISPLAY=${DISPLAY} -e LINES=`tput lines` -it ${CONTAINER_ID} bash
+docker exec -e LINES=`tput lines` -it ${CONTAINER_ID} bash
 xhost -
