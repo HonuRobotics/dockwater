@@ -45,9 +45,8 @@ Help()
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git "
-ROCKER_ARGS+="--devices /dev/dri --net=host --ssh"
-ROCKER_ARGS="${ROCKER_ARGS} --devices /dev/dri --net=host --ssh"
+ROCKER_ARGS="--devices $JOY /dev/dri --dev-helpers --nvidia --x11 --user --home --git "
+ROCKER_ARGS+="--net=host --ssh"
 # Allow the container to access the X server so that GUI applications can be run remotely
 ROCKER_ARGS+=' --volume="${HOME}/.Xauthority:/root/.Xauthority:rw"'
 
