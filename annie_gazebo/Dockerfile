@@ -38,7 +38,8 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-noetic-rosdoc-lite \
     ros-noetic-smach-viewer \  
     texlive-latex-extra \
-    texlive-fonts-recommended
+    texlive-fonts-recommended \
+    x11-apps 
     
 # Update the package list and upgrade all packages.  Otherwise you get an rviz error in Andy's demo: https://bitbucket.org/gfoe/project12/wiki/Visualize%20Radar%20in%202022-12-05-19-31-15_hover_while_fishing_boat_goes_by
 RUN apt-get update && apt-get dist-upgrade -y
