@@ -47,14 +47,14 @@ Help()
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --git --volume $(echo ~):/home/docker/HOST"
+ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume $(echo ~):/docker/HOST"
 
 while getopts ":cstxhir" option; do
   case $option in
     c) # enable cuda library support 
-      CUDA="--cuda --volume $(echo ~):/home/docker/HOST";;
+      CUDA="--cuda";;
     i) # With internal graphics card (without nvidia)
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --user --git --volume $(echo ~):/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume $(echo ~):/docker/HOST";;
     r) # With internal graphics card (without nvidia) and with RDP default user is docker
       # shellcheck disable=SC2116
       ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port 3389:3389 --volume $(echo ~):/home/docker/HOST";;
