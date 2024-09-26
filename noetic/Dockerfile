@@ -92,7 +92,16 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu ${RELEASE} main" > 
     ros-${DIST}-velodyne-gazebo-plugins \
     ros-${DIST}-velodyne-simulator \
     ros-${DIST}-xacro \
+    ros-${DIST}-image-view \
  && apt clean
+
+# Required packages for GPS Viewer/Logger and Geodetic Coordinates
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3-gdal=3.0.4+dfsg-1build3 \
+    proj-bin=6.3.1-1 \
+    libxtst6 \
+    && rm -rf /var/lib/apt/lists/*
+RUN python3 -m pip install folium PyQtWebEngine pyqt5-tools
 
 # Optional: Dev. tools, applications, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
