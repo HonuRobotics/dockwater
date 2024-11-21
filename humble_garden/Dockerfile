@@ -1,5 +1,5 @@
 # Ubuntu 22.04 
-FROM osrf/ros:humble-desktop-full-jammy
+FROM ros:humble-ros-base-jammy
 
 # Setup timezone
 ENV TZ=Etc/UTC
@@ -56,17 +56,27 @@ RUN sudo apt update && sudo apt install locales \
   && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 ARG ROSDIST=humble
+ARG GZDIST=garden
+ENV GZ_VERSION garden
 
 # Set up repo to install Ignition
 RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg' \
   && /bin/sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null'
+  
+# Install Gazebo and ROS2 Desktop
+RUN apt update \
+  && apt install -y --no-install-recommends \
+     gz-${GZDIST} \
+     ros-${ROSDIST}-desktop \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt clean -qq
+
 # Install some 'standard' ROS packages and utilities.
 RUN apt update \
   && apt install -y --no-install-recommends \
      python3-colcon-common-extensions \
      python3-vcstool \
      python3-sdformat13 \
-     ros-${ROSDIST}-ackermann-msgs \
      ros-${ROSDIST}-actuator-msgs \
      ros-${ROSDIST}-ament-cmake-pycodestyle \
      ros-${ROSDIST}-image-transport \
@@ -81,7 +91,6 @@ RUN apt update \
      ros-${ROSDIST}-rqt-plot \
      ros-${ROSDIST}-rqt-topic \
      ros-${ROSDIST}-rviz2 \
-     ros-${ROSDIST}-vision-msgs \
      ros-${ROSDIST}-xacro \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt clean -qq
