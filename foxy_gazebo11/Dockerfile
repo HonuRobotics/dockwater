@@ -1,5 +1,5 @@
-# Ubuntu 22.04 
-FROM osrf/ros:humble-desktop-full
+# Ubuntu 20.04 and ROS Foxy
+FROM osrf/ros:foxy-desktop-focal
 
 # Setup timezone
 ENV TZ=Etc/UTC
@@ -33,6 +33,7 @@ RUN apt update && \
         libspnav-dev \
         libusb-dev \
 	lsb-release \
+    nano \
 	net-tools \
 	pkg-config \
         protobuf-compiler \
@@ -55,7 +56,7 @@ RUN sudo apt update && sudo apt install locales \
   && sudo locale-gen en_US en_US.UTF-8 \
   && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
-ARG ROSDIST=humble
+ARG ROSDIST=foxy
 
 # Set up repo to install Ignition
 RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg' \
@@ -89,12 +90,3 @@ RUN apt update \
      ros-${ROSDIST}-xacro \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt clean -qq
-
-
-  # NAV2
-RUN apt update \
-  && apt install -y --no-install-recommends \
-        ros-${ROSDIST}-navigation2 \
-        ros-${ROSDIST}-nav2-bringup \
- && sudo rm -rf /var/lib/apt/lists/* \
- && sudo apt clean -qq
