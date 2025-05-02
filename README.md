@@ -7,7 +7,7 @@ See [wiki](https://github.com/HonuRobotics/dockwater/wiki) for detailed use inst
 
 This project includes the following:
 
-1. Project-specific development container Dockerfiles, many of wich use ROS and Gazebo.
+1. Project-specific development container Dockerfiles, many of which use ROS and Gazebo.
 1. Bash scripts to build images and run/join containers for interactive development environment - a thin wrapper for [rocker](https://github.com/osrf/rocker) functions.
 1. Documentation on common use-cases for developing inside of docker containers.
 
@@ -15,6 +15,7 @@ This project includes the following:
 
 The `main` branch of the repository supports baseline images for with ROS and Gazebo:
 
+* Jazzy (Ubuntu 24.04 Noble Numbat / ROS 2 Jazzy Jalisco / Gazebo Harmonic)
 * Humble (Ubuntu 22.04 Jammy Jellyfish / ROS 2 Humble Hawksbill / Gazebo Garden)
 * Galactic (Ubuntu 20.04 Focal Fossa / ROS 2 Galactic Geochelone / Ignition Fortress)
 * Noetic (Ubuntu 20.04 Focal Fossa / ROS Noetic Ninjemys / Gazebo 11)
@@ -31,7 +32,7 @@ The latest images corresponding to each of the three distributions above are sto
 ## Build Instructions
 Build the base image with the `build.bash` script. 
 ```
-DIST=(noetic | melodic | kinetic)
+DIST=(jazzy | humble | galactic | noetic | melodic | kinetic)
 ./build.bash ${DIST}
 ```
 Run the image locally using the `run.bash` script:

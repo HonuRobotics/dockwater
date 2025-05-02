@@ -57,13 +57,14 @@ RUN sudo apt update && sudo apt install locales \
   && sudo locale-gen en_US en_US.UTF-8 \
   && sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
-# Set up repo to install Ignition
+# Set up repo to install Gazebo
 RUN /bin/sh -c 'wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg' \
   && /bin/sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null'
 
   # Install some 'standard' ROS packages and utilities.
 RUN apt update \
   && apt install -y --no-install-recommends \
+     gz-harmonic \
      python3-colcon-common-extensions \
      python3-vcstool \
      ros-${ROSDIST}-ackermann-msgs \
