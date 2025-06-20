@@ -29,35 +29,38 @@
 ############################################################
 Help()
 {
-   # Display Help
-   echo "Runs a docker container with the image created by build.bash."
-   echo
-   echo "Syntax: scriptTemplate [-c|i|r|s|t|h]"
-   echo "options:"
-   echo "c     Add cuda library support."
-   echo "i     With internal graphics card (without nvidia)"
-   echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker"
-   echo "s     Create an image with novnc for use with cloudsim."
-   echo "t     Create a test image for use with CI pipelines."
-   echo "x     Create base image for the VRX competition server."
-   echo "h     Print this help message and exit."
-   echo
+  # Display Help
+  echo "Runs a docker container with the image created by build.bash."
+  echo
+  echo "Syntax: scriptTemplate [-c|i|r|s|t|h|P]"
+  echo "options:"
+  echo "c     Add cuda library support."
+  echo "i     With internal graphics card (without nvidia)"
+  echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker (host port $HOST_RDP_PORT)"
+  echo "s     Create an image with novnc for use with cloudsim."
+  echo "t     Create a test image for use with CI pipelines."
+  echo "x     Create base image for the VRX competition server."
+  echo "h     Print this help message and exit."
+  echo "P     Override host RDP port (usage: -P <host_port>)."
+  
+  echo
 }
 
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume $(echo ~):/docker/HOST"
+HOST_RDP_PORT=3389
+ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume $(echo ~):/home/docker/HOST"
 
-while getopts ":cstxhir" option; do
+while getopts ":cstxhirP:" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda";;
     i) # With internal graphics card (without nvidia)
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume $(echo ~):/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume $(echo ~):/home/docker/HOST";;
     r) # With internal graphics card (without nvidia) and with RDP default user is docker
       # shellcheck disable=SC2116
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port 3389:3389 --volume $(echo ~):/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port "$HOST_RDP_PORT":3389 --volume $(echo ~):/home/docker/HOST";;
     s) # Build cloudsim image
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
@@ -69,6 +72,8 @@ while getopts ":cstxhir" option; do
     h) # print this help message and exit
       Help
       exit;; 
+    P) # Override host RDP port
+      HOST_RDP_PORT=$OPTARG;;  
     \?) # handle unrecognized options
       echo "Invalid option: -$OPTARG" >&2
       exit 1;;
