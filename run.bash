@@ -50,17 +50,17 @@ Help()
 JOY=/dev/input/js0
 CUDA=""
 HOST_RDP_PORT=3389
-ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume $(echo ~):/home/docker/HOST"
+ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume "$HOME":/home/docker/HOST"
 
 while getopts ":cstxhirP:" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda";;
     i) # With internal graphics card (without nvidia)
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume $(echo ~):/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume "$HOME":/home/docker/HOST";;
     r) # With internal graphics card (without nvidia) and with RDP default user is docker
       # shellcheck disable=SC2116
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port "$HOST_RDP_PORT":3389 --volume $(echo ~):/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port "$HOST_RDP_PORT":3389 --volume "$HOME":/home/docker/HOST";;
     s) # Build cloudsim image
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
@@ -88,4 +88,4 @@ CONTAINER_NAME="$(tr ':' '_' <<< "$IMG_NAME")_runtime"
 ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
 
-rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME 
+rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME
