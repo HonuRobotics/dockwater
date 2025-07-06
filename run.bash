@@ -50,14 +50,14 @@ Help()
 JOY=/dev/input/js0
 CUDA=""
 HOST_RDP_PORT=3389
-ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume "$HOME":/home/docker/HOST"
+ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume "$HOME":/root/HOST"
 
 while getopts ":cstxhirP:" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda";;
     i) # With internal graphics card (without nvidia)
-      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume "$HOME":/home/docker/HOST";;
+      ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume "$HOME":/root/HOST";;
     r) # With internal graphics card (without nvidia) and with RDP default user is docker
       # shellcheck disable=SC2116
       ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port "$HOST_RDP_PORT":3389 --volume "$HOME":/home/docker/HOST";;
