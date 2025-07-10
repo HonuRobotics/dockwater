@@ -32,7 +32,7 @@ Help()
   # Display Help
   echo "Runs a docker container with the image created by build.bash."
   echo
-  echo "Syntax: $(basename $0) [-P <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
+  echo "Syntax: $(basename $0) [-p <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
   echo "options:"
   echo "c     Add cuda library support."
   echo "i     With internal graphics card (without nvidia)"
