@@ -34,10 +34,10 @@ Help()
   echo
   echo "Syntax: $(basename $0) [-p <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
   echo "options:"
+  echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker (host port $HOST_RDP_PORT)"
   echo "c     Add cuda library support."
   echo "i     With internal graphics card (without nvidia)"
   echo "p     Override host RDP port (follow syntax for usage, only affects -r option)"
-  echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker (host port $HOST_RDP_PORT)"
   echo "s     Create an image with novnc for use with cloudsim."
   echo "t     Create a test image for use with CI pipelines."
   echo "x     Create base image for the VRX competition server."
