@@ -32,16 +32,16 @@ Help()
   # Display Help
   echo "Runs a docker container with the image created by build.bash."
   echo
-  echo "Syntax: scriptTemplate [-c|i|r|s|t|h|P]"
+  echo "Syntax: $(basename $0) [-P <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
   echo "options:"
   echo "c     Add cuda library support."
   echo "i     With internal graphics card (without nvidia)"
+  echo "p     Override host RDP port (follow syntax for usage, only affects -r option)"
   echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker (host port $HOST_RDP_PORT)"
   echo "s     Create an image with novnc for use with cloudsim."
   echo "t     Create a test image for use with CI pipelines."
   echo "x     Create base image for the VRX competition server."
   echo "h     Print this help message and exit."
-  echo "P     Override host RDP port (usage: -P <host_port>)."
   
   echo
 }
@@ -52,7 +52,7 @@ CUDA=""
 HOST_RDP_PORT=3389
 ROCKER_ARGS="--devices /dev/dri $JOY --dev-helpers --nvidia --x11 --git --volume "$HOME":/root/HOST"
 
-while getopts ":cstxhirP:" option; do
+while getopts ":cstxhirp:" option; do
   case $option in
     c) # enable cuda library support 
       CUDA="--cuda";;
@@ -72,8 +72,11 @@ while getopts ":cstxhirP:" option; do
     h) # print this help message and exit
       Help
       exit;; 
-    P) # Override host RDP port
-      HOST_RDP_PORT=$OPTARG;;  
+    p) # Override host RDP port
+      HOST_RDP_PORT=$OPTARG;;
+    :) #handle missing arguments
+      echo "Error: Option -$OPTARG requires an argument." >&2
+      exit 1;;  
     \?) # handle unrecognized options
       echo "Invalid option: -$OPTARG" >&2
       exit 1;;
