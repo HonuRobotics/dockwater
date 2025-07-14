@@ -58,7 +58,8 @@ while getopts ":cstxhirp:" option; do
       CUDA="--cuda";;
     i) # With internal graphics card (without nvidia)
       ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --volume "$HOME":/root/HOST";;
-    r) # With internal graphics card (without nvidia) and with RDP default user is docker
+    r) # With internal graphics card (without nvidia) and with RDP. 
+      # The default user in container is 'docker' due to RDP constraints (custom host port can be set via the -p option)
       # shellcheck disable=SC2116
       ROCKER_ARGS="--devices /dev/dri $JOY --x11 --git --port "$HOST_RDP_PORT":3389 --volume "$HOME":/home/docker/HOST";;
     s) # Build cloudsim image
