@@ -34,7 +34,7 @@ Help()
   echo
   echo "Syntax: $(basename $0) [-p <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
   echo "options:"
-  echo "r     With internal graphics card (without nvidia) and with RDP. default user is docker (host port $HOST_RDP_PORT)"
+  echo "r     With internal graphics card (without nvidia) and with RDP. The default user in container is 'docker' due to RDP constraints (custom host port can be set via the -p option)"
   echo "c     Add cuda library support."
   echo "i     With internal graphics card (without nvidia)"
   echo "p     Override host RDP port (follow syntax for usage, only affects -r option)"
