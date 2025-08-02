@@ -74,12 +74,15 @@ RUN apt update \
      ros-${ROSDIST}-image-transport-plugins \
      ros-${ROSDIST}-joy-teleop \
      ros-${ROSDIST}-joy-linux \
+     ros-${ROSDIST}-marine-acoustic-msgs \
+     ros-${ROSDIST}-marine-sensor-msgs \
      ros-${ROSDIST}-mavros-msgs \
      ros-${ROSDIST}-navigation2 \
      ros-${ROSDIST}-nav2-bringup \
      ros-${ROSDIST}-nav2-minimal-tb3-sim \
      ros-${ROSDIST}-nav2-minimal-tb4-description\
      ros-${ROSDIST}-nav2-minimal-tb4-sim \
+     ros-${ROSDIST}-plotjuggler-ros \
      ros-${ROSDIST}-radar-msgs \
      ros-${ROSDIST}-ros-gz-sim\
      ros-${ROSDIST}-vision-msgs \
