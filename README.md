@@ -30,7 +30,7 @@ Extending the base development environments is done by adding a branch to the re
 The latest images corresponding to each of the three distributions above are stored in the [`npslearninglab/watery_robots` repository on Dockerhub](https://hub.docker.com/r/npslearninglab/watery_robots).
 
 ## Build Instructions
-Build the base image with the `build.bash` script. 
+Build the base image with the `build.bash` script.
 ```
 DIST=(jazzy | humble | galactic | noetic | melodic | kinetic)
 ./build.bash ${DIST}

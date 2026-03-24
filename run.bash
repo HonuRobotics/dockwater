@@ -29,28 +29,39 @@
 ############################################################
 Help()
 {
-   # Display Help
-   echo "Runs a docker container with the image created by build.bash."
-   echo
-   echo "Syntax: scriptTemplate [-c|s|t|h]"
-   echo "options:"
-   echo "c     Add cuda library support."
-   echo "s     Create an image with novnc for use with cloudsim."
-   echo "t     Create a test image for use with CI pipelines."
-   echo "x     Create base image for the VRX competition server."
-   echo "h     Print this help message and exit."
-   echo
+  # Display Help
+  echo "Runs a docker container with the image created by build.bash."
+  echo
+  echo "Syntax: $(basename $0) [-p <host_port>] [-c|i|r|s|t|h] <docker_img_name>"
+  echo "options:"
+  echo "r     With internal graphics card (without nvidia) and with RDP. The default user in container is 'docker' due to RDP constraints (custom host port can be set via the -p option)"
+  echo "c     Add cuda library support."
+  echo "i     With internal graphics card (without nvidia)"
+  echo "p     Override host RDP port (follow syntax for usage, only affects -r option)"
+  echo "s     Create an image with novnc for use with cloudsim."
+  echo "t     Create a test image for use with CI pipelines."
+  echo "x     Create base image for the VRX competition server."
+  echo "h     Print this help message and exit."
+  
+  echo
 }
 
 
 JOY=/dev/input/js0
 CUDA=""
-ROCKER_ARGS="--devices $JOY --dev-helpers --nvidia --x11 --user --home --git --persist-image"
+HOST_RDP_PORT=3389
+ROCKER_ARGS="--devices /dev/dri --devices $JOY --dev-helpers --nvidia --x11 --git --persist-image --volume $(echo ~):/docker/HOST"
 
-while getopts ":cstxh" option; do
+while getopts ":cstxhirp:" option; do
   case $option in
     c) # enable cuda library support 
-      CUDA="--cuda ";;
+      CUDA="--cuda";;
+    i) # With internal graphics card (without nvidia)
+      ROCKER_ARGS="--devices /dev/dri --devices $JOY --x11 --git --persist-image --volume "$HOME":/root/HOST";;
+    r) # With internal graphics card (without nvidia) and with RDP. 
+      # The default user in container is 'docker' due to RDP constraints (custom host port can be set via the -p option)
+      # shellcheck disable=SC2116
+      ROCKER_ARGS="--devices /dev/dri --devices $JOY --x11 --git --persist-image --port "$HOST_RDP_PORT":3389 --volume "$HOME":/home/docker/HOST --device /dev/fuse --privileged";;
     s) # Build cloudsim image
       ROCKER_ARGS="--nvidia --novnc --turbovnc --user --user-override-name=developer";;
     t) # Build test image for Continuous Integration 
@@ -62,6 +73,14 @@ while getopts ":cstxh" option; do
     h) # print this help message and exit
       Help
       exit;; 
+    p) # Override host RDP port
+      HOST_RDP_PORT=$OPTARG;;
+    :) #handle missing arguments
+      echo "Error: Option -$OPTARG requires an argument." >&2
+      exit 1;;  
+    \?) # handle unrecognized options
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1;;
   esac
 done
 
@@ -73,4 +92,4 @@ CONTAINER_NAME="$(tr ':' '_' <<< "$IMG_NAME")_runtime"
 ROCKER_ARGS="${ROCKER_ARGS} --name $CONTAINER_NAME"
 echo "Using image <$IMG_NAME> to start container <$CONTAINER_NAME>"
 
-rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME 
+rocker ${CUDA} ${ROCKER_ARGS} $IMG_NAME
