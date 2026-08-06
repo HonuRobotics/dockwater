@@ -1,5 +1,7 @@
 # dockwater
 
+> **For ROS 2 Lyrical and newer**, Honu Robotics development has moved to a Docker Compose environment: [HonuRobotics/drydock](https://github.com/HonuRobotics/drydock). dockwater remains the rocker-based environment for Kinetic through Jazzy and is not deprecated.
+
 Tools to simplify creation and use of Docker containers for development and production.  
 
 See [wiki](https://github.com/HonuRobotics/dockwater/wiki) for detailed use instructions.
